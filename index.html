@@ -58,6 +58,9 @@
     .portrait { display: block; width: 100%; max-width: 420px; height: auto; margin-top: 2.5rem; border: 3px solid var(--w); }
     #about p { font-size: 1.15rem; max-width: 34em; }
     #about p + p { margin-top: 1.25rem; }
+    .stats { display: flex; gap: 3rem; margin-top: 2.5rem; }
+    .stats b { display: block; font-size: clamp(2.5rem, 6vw, 4.5rem); line-height: 1; letter-spacing: -.04em; }
+    .stats span { font-size: .85rem; text-transform: uppercase; letter-spacing: .12em; }
     .skills { list-style: none; margin-top: 2.5rem; border-top: 1px solid var(--w); }
     .skills li { padding: .75rem 0; border-bottom: 1px solid var(--w); text-transform: uppercase; letter-spacing: .12em; font-size: .85rem; }
 
@@ -116,12 +119,13 @@
       <div class="label"><span>About</span><span>01</span></div>
       <div class="about-grid">
         <div class="about-left">
-          <h2>Simple.<br>Bold.<br>Intentional.</h2>
-          <img class="portrait" src="harrison.jpg" alt="Portrait of Harrison" width="1000" height="1000" />
+          <h2>Hey, I'm<br>Harrison.</h2>
+          <img class="portrait" src="harrison.jpg" alt="Harrison, designer, smiling" width="1000" height="1000" />
         </div>
         <div>
-          <p>I'm Harrison, a designer who believes the strongest work says more with less. HM Design is where my personal style lives: clean type, strong contrast, and nothing extra.</p>
-          <p>Replace this with a few lines about your background and approach.</p>
+          <p>A freelance designer based in Portland, Oregon, focused on helping individuals and organizations communicate clearly and creatively. Over 10+ years, I've developed skills in photography, graphic design, and web design&mdash;learning how to bring ideas to life in ways that are visually strong and strategically effective.</p>
+          <p>Every project is an opportunity to create something that connects, tells a story, and serves a purpose. My goal is always work that feels intentional and lasting.</p>
+          <div class="stats"><div><b>10+</b><span>Years Experience</span></div><div><b>PDX</b><span>Based In</span></div></div>
           <ul class="skills">
             <li>Brand Identity</li><li>Graphic Design</li><li>Web Design</li><li>Photography</li><li>Videography</li>
           </ul>
