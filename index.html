@@ -186,6 +186,8 @@
           For a website: same as image, plus data-url set to the live site link.
           For a video: no <img>/media div contents needed except the play button -
             set data-youtube-id to the video's ID (the part after youtu.be/ or v=).
+            Optional: data-youtube-si with the ?si= value from YouTube's Share > Embed code; the
+            player then loads exactly as YouTube's embed code does (no autoplay).
           For a deck (e.g. a slide deck exported to one image per slide): data-type="deck",
             and inside .portfolio-card-media put a <div class="portfolio-card-deck"> holding
             one <img> per slide in order, plus <span class="portfolio-deck-counter">1 / N</span>.
@@ -315,7 +317,7 @@
         </div>
       </div>
 
-      <div class="portfolio-card" tabindex="0" role="button" data-category="video" data-type="video" data-title="Travel Maui" data-youtube-id="dJkl4D4vLn0">
+      <div class="portfolio-card" tabindex="0" role="button" data-category="video" data-type="video" data-title="Travel Maui" data-youtube-id="dJkl4D4vLn0" data-youtube-si="TU-CTteFXMrXww5B">
         <div class="portfolio-card-media">
           <img src="portfolio/travel-maui-thumb.jpg" alt="Travel Maui" loading="lazy" />
           <div class="portfolio-card-play"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></div>
@@ -506,7 +508,7 @@
       currentVideo = null;
       if (type === 'video' && d.youtubeId) {
         currentVideo = { id: d.youtubeId, poster: img ? img.getAttribute('src') : '' };
-        lightboxMedia.innerHTML = '<div class="lightbox-video-frame"><iframe src="https://www.youtube.com/embed/' + d.youtubeId + '?autoplay=1" title="' + d.title + '" referrerpolicy="strict-origin-when-cross-origin" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe></div>';
+        lightboxMedia.innerHTML = '<div class="lightbox-video-frame"><iframe src="https://www.youtube.com/embed/' + d.youtubeId + (d.youtubeSi ? '?si=' + d.youtubeSi : '?autoplay=1') + '" title="' + d.title + '" referrerpolicy="strict-origin-when-cross-origin" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe></div>';
       } else if (type === 'video') {
         lightboxMedia.innerHTML = '<div class="lightbox-video-frame lightbox-placeholder">Sample placeholder. Add a YouTube link to play here.</div>';
       } else if (type === 'deck') {
