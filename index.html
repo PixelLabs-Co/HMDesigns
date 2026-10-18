@@ -55,6 +55,7 @@
     #about .label { border-color: var(--w); }
     .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(2rem, 6vw, 6rem); }
     #about h2 { font-size: clamp(2.5rem, 7vw, 6rem); line-height: .95; letter-spacing: -.04em; }
+    .portrait { display: block; width: 100%; max-width: 420px; height: auto; margin-top: 2.5rem; border: 3px solid var(--w); }
     #about p { font-size: 1.15rem; max-width: 34em; }
     #about p + p { margin-top: 1.25rem; }
     .skills { list-style: none; margin-top: 2.5rem; border-top: 1px solid var(--w); }
@@ -114,7 +115,10 @@
     <section id="about">
       <div class="label"><span>About</span><span>01</span></div>
       <div class="about-grid">
-        <h2>Simple.<br>Bold.<br>Intentional.</h2>
+        <div class="about-left">
+          <h2>Simple.<br>Bold.<br>Intentional.</h2>
+          <img class="portrait" src="harrison.jpg" alt="Portrait of Harrison" width="1000" height="1000" />
+        </div>
         <div>
           <p>I'm Harrison, a designer who believes the strongest work says more with less. HM Design is where my personal style lives: clean type, strong contrast, and nothing extra.</p>
           <p>Replace this with a few lines about your background and approach.</p>
