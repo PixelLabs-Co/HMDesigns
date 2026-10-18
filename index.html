@@ -34,7 +34,8 @@
     @keyframes grain { 0% { transform: translate(0,0); } 20% { transform: translate(-4%,3%); } 40% { transform: translate(3%,-5%); } 60% { transform: translate(-5%,-2%); } 80% { transform: translate(4%,4%); } 100% { transform: translate(0,0); } }
     .sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
 
-    .brand img { display: block; height: 1.6rem; width: auto; }
+    .brand { flex: 0 0 auto; display: block; }
+    .brand img { display: block; height: clamp(2rem, 5vw, 3rem); width: auto; aspect-ratio: 722 / 215; }
     .hero-meta { display: flex; justify-content: space-between; gap: 2rem; flex-wrap: wrap; margin-top: 2.5rem; padding-top: 1rem; border-top: 3px solid var(--w); font-size: .9rem; text-transform: uppercase; letter-spacing: .12em;  }
 
     section { padding: clamp(4rem, 10vw, 9rem) var(--pad); }
@@ -82,7 +83,7 @@
 </head>
 <body>
   <header>
-    <a href="#top" class="brand" aria-label="HM Design home"><img src="logo.png" alt="HM Design" /></a>
+    <a href="#top" class="brand" aria-label="HM Design home"><img src="logo.png" alt="HM Design" width="722" height="215" /></a>
     <nav aria-label="Primary">
       <a href="#work">Work</a>
       <a href="#about">About</a>
