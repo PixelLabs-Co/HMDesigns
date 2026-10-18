@@ -41,16 +41,64 @@
     section { padding: clamp(4rem, 10vw, 9rem) var(--pad); }
     .label { font-size: .85rem; text-transform: uppercase; letter-spacing: .12em; display: flex; justify-content: space-between; border-top: 3px solid var(--b); padding-top: 1rem; margin-bottom: 2.5rem; }
 
-    .grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 0; border: 3px solid var(--b); }
-    .card { position: relative; display: flex; flex-direction: column; justify-content: space-between; aspect-ratio: 4 / 3; padding: 1.5rem; text-decoration: none; background: var(--w); color: var(--b); border: 1.5px solid var(--b); overflow: hidden; transition: background .2s, color .2s; }
-    .card img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; filter: grayscale(1) contrast(1.1); }
-    .card > * { position: relative; }
-    .card .num { font-size: .85rem; letter-spacing: .12em; }
-    .card h3 { font-size: clamp(2rem, 5vw, 4rem); line-height: .95; letter-spacing: -.04em; }
-    .card p { font-size: .85rem; text-transform: uppercase; letter-spacing: .12em; margin-top: .75rem; }
-    .card:hover, .card:focus-visible { background: var(--b); color: var(--w); outline: none; }
-    .card.has-img { color: var(--w); } .card.has-img::before { content: ''; position: absolute; inset: 0; background: rgba(0,0,0,.35); transition: background .2s; z-index: 0; } .card.has-img:hover::before { background: rgba(0,0,0,.7); }
-    .card.has-img > * { z-index: 1; }
+    .portfolio-tabs { display: flex; flex-wrap: wrap; gap: .75rem; margin-bottom: 2rem; }
+    .portfolio-tab { font: inherit; font-size: .8rem; text-transform: uppercase; letter-spacing: .12em; color: var(--b); background: var(--w); border: 2px solid var(--b); padding: .7rem 1.25rem; cursor: pointer; transition: background .2s, color .2s; }
+    .portfolio-tab:hover, .portfolio-tab.active { background: var(--b); color: var(--w); }
+    .portfolio-grid { display: grid; grid-template-columns: repeat(3, 1fr); align-items: start; gap: 1.5rem; }
+    .portfolio-card { border: 3px solid var(--b); background: var(--w); cursor: pointer; display: flex; flex-direction: column; transition: transform .2s; }
+    .portfolio-card.is-hidden { display: none; }
+    .portfolio-card:hover { transform: translateY(-4px); }
+    .portfolio-card:focus-visible { outline: 3px solid var(--b); outline-offset: 4px; }
+    .portfolio-card-media { position: relative; overflow: hidden; aspect-ratio: 4 / 3; background: #f0f0f0; }
+    .portfolio-card img { width: 100%; height: 100%; display: block; object-fit: contain; filter: grayscale(1); transition: transform .4s; }
+    .portfolio-card:hover img { transform: scale(1.05); }
+    .portfolio-card-placeholder { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; font-size: clamp(4rem, 9vw, 7rem); font-weight: 700; letter-spacing: -.05em; color: var(--b); }
+    .portfolio-card[data-type="video"] .portfolio-card-placeholder { display: none; }
+    .portfolio-card-info { padding: 1.25rem; border-top: 3px solid var(--b); display: flex; align-items: center; justify-content: space-between; gap: .75rem; }
+    .portfolio-card-cat { font-size: .72rem; text-transform: uppercase; letter-spacing: .12em; margin-bottom: .45rem; }
+    .portfolio-card-title { font-size: 1.3rem; font-weight: 700; letter-spacing: -.03em; line-height: 1.1; }
+    .portfolio-card-badge, .portfolio-card-play { position: absolute; display: flex; align-items: center; justify-content: center; background: var(--b); color: var(--w); border-radius: 50%; }
+    .portfolio-card-badge { top: 1rem; right: 1rem; width: 40px; height: 40px; }
+    .portfolio-card-badge svg { width: 16px; height: 16px; }
+    .portfolio-card-play { top: 50%; left: 50%; transform: translate(-50%, -50%); width: 76px; height: 76px; transition: transform .2s; }
+    .portfolio-card-play svg { width: 34px; height: 34px; margin-left: 4px; }
+    .portfolio-card:hover .portfolio-card-play { transform: translate(-50%, -50%) scale(1.08); }
+    .portfolio-sample-tag, .portfolio-featured-tag { font-size: .6rem; text-transform: uppercase; letter-spacing: .12em; padding: .35rem .6rem; border: 1.5px solid var(--b); }
+    .portfolio-sample-tag { position: absolute; top: 1rem; left: 1rem; background: var(--w); color: var(--b); z-index: 1; }
+    .portfolio-featured-tag { flex-shrink: 0; background: var(--b); color: var(--w); }
+    .portfolio-card-deck, .lightbox-deck { display: flex; overflow-x: auto; scroll-snap-type: x mandatory; -webkit-overflow-scrolling: touch; scrollbar-width: none; overflow-anchor: none; }
+    .portfolio-card-deck { height: 100%; }
+    .portfolio-card-deck::-webkit-scrollbar, .lightbox-deck::-webkit-scrollbar { display: none; }
+    .portfolio-card-deck img, .lightbox-deck img { flex: 0 0 100%; scroll-snap-align: start; }
+    .lightbox-deck img { width: 100%; height: auto; display: block; }
+    .portfolio-card:hover .portfolio-card-deck img { transform: none; }
+    .portfolio-deck-counter { position: absolute; bottom: 1rem; right: 1rem; font-size: .65rem; letter-spacing: .1em; background: var(--b); color: var(--w); padding: .3rem .55rem; pointer-events: none; }
+    .portfolio-deck-arrow { position: absolute; top: 50%; transform: translateY(-50%); width: 34px; height: 34px; border-radius: 50%; background: var(--b); border: 0; color: var(--w); display: flex; align-items: center; justify-content: center; opacity: 0; transition: opacity .2s; cursor: pointer; z-index: 2; }
+    .portfolio-card-media:hover .portfolio-deck-arrow { opacity: 1; }
+    .portfolio-deck-arrow.prev { left: .75rem; } .portfolio-deck-arrow.next { right: .75rem; }
+    .portfolio-deck-arrow svg { width: 16px; height: 16px; }
+    .portfolio-empty { text-align: center; padding: 4rem 0; font-size: .95rem; }
+    .portfolio-empty a { text-decoration: underline; text-underline-offset: 3px; }
+
+    .lightbox-overlay { position: fixed; inset: 0; z-index: 300; background: rgba(0,0,0,.92); display: flex; align-items: center; justify-content: center; padding: 2rem; opacity: 0; pointer-events: none; transition: opacity .25s ease; }
+    .lightbox-overlay.open { opacity: 1; pointer-events: all; }
+    .lightbox-card { position: relative; width: 100%; max-width: 900px; max-height: 90vh; overflow-y: auto; background: var(--w); color: var(--b); border: 3px solid var(--w); transform: translateY(20px); transition: transform .3s ease; }
+    .lightbox-overlay.open .lightbox-card { transform: translateY(0); }
+    .lightbox-media { width: 100%; background: #f0f0f0; display: block; position: relative; }
+    .lightbox-media .portfolio-deck-arrow { opacity: .85; }
+    .lightbox-media img { width: 100%; height: auto; display: block; filter: grayscale(1); }
+    .lightbox-video-frame { position: relative; width: 100%; aspect-ratio: 16/9; }
+    .lightbox-video-frame iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+    .lightbox-placeholder { display: flex; align-items: center; justify-content: center; text-align: center; padding: 1rem; font-size: .85rem; text-transform: uppercase; letter-spacing: .12em; }
+    .lightbox-body { padding: 2rem 2.5rem 2.5rem; border-top: 3px solid var(--b); }
+    .lightbox-cat { font-size: .72rem; text-transform: uppercase; letter-spacing: .12em; margin-bottom: .6rem; }
+    .lightbox-title { font-size: 2rem; font-weight: 700; letter-spacing: -.04em; line-height: 1.05; margin-bottom: .75rem; }
+    .lightbox-desc { line-height: 1.7; margin-bottom: 1.5rem; }
+    .lightbox-link { display: none; background: var(--b); color: var(--w); padding: .9rem 1.6rem; text-transform: uppercase; letter-spacing: .12em; font-size: .8rem; text-decoration: none; border: 2px solid var(--b); }
+    .lightbox-link:hover { background: var(--w); color: var(--b); }
+    .lightbox-close { position: absolute; top: 1.2rem; right: 1.2rem; z-index: 2; width: 36px; height: 36px; background: var(--b); border: 0; cursor: pointer; display: flex; align-items: center; justify-content: center; }
+    .lightbox-close span { position: absolute; width: 16px; height: 1.5px; background: var(--w); }
+    .lightbox-close span:first-child { transform: rotate(45deg); } .lightbox-close span:last-child { transform: rotate(-45deg); }
 
     #about { background: var(--b); color: var(--w); }
     #about .label { border-color: var(--w); }
@@ -75,10 +123,14 @@
 
     a:focus-visible { outline: 3px solid currentColor; outline-offset: 4px; }
     @media (max-width: 760px) {
-      .grid, .about-grid { grid-template-columns: 1fr; }
+      .about-grid { grid-template-columns: 1fr; }
+      .portfolio-grid { grid-template-columns: 1fr; }
+      .lightbox-overlay { padding: 1rem; } .lightbox-body { padding: 1.5rem; } .lightbox-title { font-size: 1.5rem; }
+      .portfolio-card-title { font-size: 1.2rem; }
       nav { gap: 1rem; } nav a { font-size: .75rem; }
     }
     @media (prefers-reduced-motion: reduce) { .glow i, .grain { animation: none !important; } html { scroll-behavior: auto; } * { transition: none !important; } }
+      @media (max-width: 1000px) and (min-width: 761px) { .portfolio-grid { grid-template-columns: repeat(2, 1fr); } }
   </style>
 </head>
 <body>
@@ -104,15 +156,116 @@
     </div>
 
     <section id="work">
-      <div class="label"><span>Selected Work</span><span>06 Projects</span></div>
-      <!-- To add an image to a project: drop a file in /work and add class "has-img" plus <img src="work/name.jpg" alt="..."> inside the card. -->
-      <div class="grid">
-        <a class="card" href="#contact"><span class="num">01</span><div><h3>Project One</h3><p>Branding</p></div></a>
-        <a class="card" href="#contact"><span class="num">02</span><div><h3>Project Two</h3><p>Logo Design</p></div></a>
-        <a class="card" href="#contact"><span class="num">03</span><div><h3>Project Three</h3><p>Web Design</p></div></a>
-        <a class="card" href="#contact"><span class="num">04</span><div><h3>Project Four</h3><p>Packaging</p></div></a>
-        <a class="card" href="#contact"><span class="num">05</span><div><h3>Project Five</h3><p>Editorial</p></div></a>
-        <a class="card" href="#contact"><span class="num">06</span><div><h3>Project Six</h3><p>Photography</p></div></a>
+      <div class="label"><span>Selected Work</span><span id="workCount">06 Projects</span></div>
+      <div class="portfolio-tabs" id="portfolioTabs">
+        <button class="portfolio-tab active" data-filter="all">All</button>
+        <button class="portfolio-tab" data-filter="brand-design">Brand Design</button>
+        <button class="portfolio-tab" data-filter="graphic-design">Graphic Design</button>
+        <button class="portfolio-tab" data-filter="web-design">Web Design</button>
+        <button class="portfolio-tab" data-filter="video">Video</button>
+        <button class="portfolio-tab" data-filter="photography">Photography</button>
+      </div>
+
+      <!--
+        To add new work: copy a .portfolio-card block below and edit it.
+        Newest work goes at the TOP of this list.
+          data-category: brand-design | graphic-design | web-design | video | photography
+            - space-separate more than one (e.g. "brand-design graphic-design") to list a
+            card under multiple tabs; also write every matching label into .portfolio-card-cat
+            (e.g. "Brand Design · Graphic Design").
+          data-type: image (default, omit it) | website | video | deck
+          data-title / data-description: shown on the card and in the lightbox
+          For an image: put the file in /portfolio and reference it in the <img src>
+            (replace the .portfolio-card-placeholder div).
+          For a website: same as image, plus data-url set to the live site link.
+          For a video: no <img>/media div contents needed except the play button -
+            set data-youtube-id to the video's ID (the part after youtu.be/ or v=).
+          For a deck (e.g. a slide deck exported to one image per slide): data-type="deck",
+            and inside .portfolio-card-media put a <div class="portfolio-card-deck"> holding
+            one <img> per slide in order, plus <span class="portfolio-deck-counter">1 / N</span>.
+            The script below adds the scroll behavior, slide counter, arrows, and the matching
+            scrollable view in the lightbox automatically.
+          Add class "portfolio-sample" + a <span class="portfolio-sample-tag">Sample</span>
+            to mark a placeholder - remove both once it's real work.
+          Only one card should carry <span class="portfolio-featured-tag">Featured</span> at
+            a time - it's the newest upload. When adding a new card, move the tag (and its
+            wrapping <div> around cat+title) from whichever card currently has it onto the
+            new one, rather than adding a second.
+          Replacing an existing image's content? Give the new file a new name
+            (e.g. add "-v2") instead of overwriting the old filename - browsers
+            cache images by URL, so reusing the same filename can keep showing
+            the old version for a while even after publishing.
+      -->
+      <div class="portfolio-grid" id="portfolioGrid">
+      <div class="portfolio-card portfolio-sample" tabindex="0" role="button" data-category="video" data-type="video" data-title="Sample Video" data-description="Sample project. Replace this card with real work.">
+        <div class="portfolio-card-media">
+          <span class="portfolio-sample-tag">Sample</span>
+          <div class="portfolio-card-placeholder" aria-hidden="true">06</div>
+          <div class="portfolio-card-play"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></div>
+        </div>
+        <div class="portfolio-card-info">
+          <div>
+            <div class="portfolio-card-cat">Video</div>
+            <div class="portfolio-card-title">Sample Video</div>
+          </div>
+          <span class="portfolio-featured-tag">Featured</span>
+        </div>
+      </div>
+      <div class="portfolio-card portfolio-sample" tabindex="0" role="button" data-category="web-design" data-type="website" data-title="Sample Website" data-description="Sample project. Replace this card with real work.">
+        <div class="portfolio-card-media">
+          <span class="portfolio-sample-tag">Sample</span>
+          <div class="portfolio-card-placeholder" aria-hidden="true">05</div>
+          <div class="portfolio-card-badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 3h7v7M21 3l-9 9M21 14v5a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2h5"/></svg></div>
+        </div>
+        <div class="portfolio-card-info">
+          <div class="portfolio-card-cat">Web Design</div>
+          <div class="portfolio-card-title">Sample Website</div>
+        </div>
+      </div>
+      <div class="portfolio-card portfolio-sample" tabindex="0" role="button" data-category="photography" data-title="Sample Photography" data-description="Sample project. Replace this card with real work.">
+        <div class="portfolio-card-media">
+          <span class="portfolio-sample-tag">Sample</span>
+          <div class="portfolio-card-placeholder" aria-hidden="true">04</div>
+        </div>
+        <div class="portfolio-card-info">
+          <div class="portfolio-card-cat">Photography</div>
+          <div class="portfolio-card-title">Sample Photography</div>
+        </div>
+      </div>
+      <div class="portfolio-card portfolio-sample" tabindex="0" role="button" data-category="graphic-design" data-title="Sample Logo" data-description="Sample project. Replace this card with real work.">
+        <div class="portfolio-card-media">
+          <span class="portfolio-sample-tag">Sample</span>
+          <div class="portfolio-card-placeholder" aria-hidden="true">03</div>
+        </div>
+        <div class="portfolio-card-info">
+          <div class="portfolio-card-cat">Graphic Design</div>
+          <div class="portfolio-card-title">Sample Logo</div>
+        </div>
+      </div>
+      <div class="portfolio-card portfolio-sample" tabindex="0" role="button" data-category="brand-design" data-title="Sample Branding" data-description="Sample project. Replace this card with real work.">
+        <div class="portfolio-card-media">
+          <span class="portfolio-sample-tag">Sample</span>
+          <div class="portfolio-card-placeholder" aria-hidden="true">02</div>
+        </div>
+        <div class="portfolio-card-info">
+          <div class="portfolio-card-cat">Brand Design</div>
+          <div class="portfolio-card-title">Sample Branding</div>
+        </div>
+      </div>
+      <div class="portfolio-card portfolio-sample" tabindex="0" role="button" data-category="brand-design graphic-design" data-title="Sample Identity System" data-description="Sample project. Replace this card with real work.">
+        <div class="portfolio-card-media">
+          <span class="portfolio-sample-tag">Sample</span>
+          <div class="portfolio-card-placeholder" aria-hidden="true">01</div>
+        </div>
+        <div class="portfolio-card-info">
+          <div class="portfolio-card-cat">Brand Design · Graphic Design</div>
+          <div class="portfolio-card-title">Sample Identity System</div>
+        </div>
+      </div>
+      </div>
+
+      <div class="portfolio-empty" id="portfolioEmpty" style="display:none;">
+        <p>New work in this category is on the way. Check back soon, or <a href="mailto:harrisonmitch40@icloud.com?subject=Start%20a%20Project">get in touch</a> to start a project.</p>
       </div>
     </section>
 
@@ -144,5 +297,171 @@
   </main>
 
   <footer><span>&copy; 2026 HM Design</span><a href="#top">Back to top &uarr;</a></footer>
+
+  <div class="lightbox-overlay" id="lightbox" aria-hidden="true">
+    <div class="lightbox-card" role="dialog" aria-modal="true" aria-labelledby="lightboxTitle">
+      <button type="button" class="lightbox-close" id="lightboxClose" aria-label="Close"><span></span><span></span></button>
+      <div class="lightbox-media" id="lightboxMedia"></div>
+      <div class="lightbox-body">
+        <p class="lightbox-cat" id="lightboxCat"></p>
+        <h3 class="lightbox-title" id="lightboxTitle"></h3>
+        <p class="lightbox-desc" id="lightboxDesc"></p>
+        <a href="#" class="lightbox-link" id="lightboxLink" target="_blank" rel="noopener">Visit Live Site</a>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // The portfolio cards live as real HTML in the page (see the comment above the
+    // grid) so crawlers that don't run JavaScript can still read every title and
+    // category. This script only adds tab filtering, deck scrolling and the lightbox.
+    const CATEGORY_LABELS = {
+      'brand-design': 'Brand Design',
+      'graphic-design': 'Graphic Design',
+      'web-design': 'Web Design',
+      'video': 'Video',
+      'photography': 'Photography'
+    };
+
+    // Deck cards (a slide deck as a scrollable strip of images): prev/next arrows
+    // and a live slide counter, for both grid cards and the lightbox deck view.
+    function setupDeckScroll(deckEl) {
+      const parent = deckEl.parentElement;
+      const counter = parent.querySelector('.portfolio-deck-counter');
+      const total = deckEl.children.length;
+      const arrow = (dir, label, path) => {
+        const b = document.createElement('button');
+        b.className = 'portfolio-deck-arrow ' + (dir < 0 ? 'prev' : 'next');
+        b.type = 'button';
+        b.setAttribute('aria-label', label);
+        b.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="' + path + '"/></svg>';
+        b.addEventListener('click', (e) => {
+          e.stopPropagation();
+          deckEl.dataset.userInteracted = '1';
+          deckEl.scrollBy({ left: dir * deckEl.clientWidth, behavior: 'smooth' });
+        });
+        parent.appendChild(b);
+      };
+      arrow(-1, 'Previous slide', 'M15 18l-6-6 6-6');
+      arrow(1, 'Next slide', 'M9 18l6-6-6-6');
+      const markInteracted = () => { deckEl.dataset.userInteracted = '1'; };
+      deckEl.addEventListener('pointerdown', markInteracted, { once: true });
+      deckEl.addEventListener('wheel', markInteracted, { once: true, passive: true });
+      deckEl.addEventListener('scroll', () => {
+        const idx = Math.min(Math.round(deckEl.scrollLeft / deckEl.clientWidth) + 1, total);
+        if (counter) counter.textContent = idx + ' / ' + total;
+      });
+    }
+    document.querySelectorAll('.portfolio-card-deck').forEach(setupDeckScroll);
+
+    // Always start each deck on slide 1 (Chrome can restore inner scroll positions late).
+    function resetDecksToStart() {
+      document.querySelectorAll('.portfolio-card-deck').forEach(deck => {
+        if (deck.dataset.userInteracted) return;
+        deck.scrollLeft = 0;
+        const counter = deck.parentElement.querySelector('.portfolio-deck-counter');
+        if (counter) counter.textContent = '1 / ' + deck.children.length;
+      });
+    }
+    resetDecksToStart();
+    window.addEventListener('load', resetDecksToStart);
+    window.addEventListener('pageshow', resetDecksToStart);
+    [0, 150, 600].forEach(ms => setTimeout(resetDecksToStart, ms));
+
+    const cards = document.querySelectorAll('.portfolio-card');
+    cards.forEach(card => {
+      card.addEventListener('click', (e) => { if (!e.target.closest('.portfolio-deck-arrow')) openLightbox(card); });
+      card.addEventListener('keydown', (e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openLightbox(card); } });
+    });
+
+    // Tabs
+    const portfolioEmpty = document.getElementById('portfolioEmpty');
+    const workCount = document.getElementById('workCount');
+    function updateCount(n) { workCount.textContent = String(n).padStart(2, '0') + (n === 1 ? ' Project' : ' Projects'); }
+    updateCount(cards.length);
+    document.querySelectorAll('.portfolio-tab').forEach(tab => {
+      tab.addEventListener('click', () => {
+        document.querySelectorAll('.portfolio-tab').forEach(t => t.classList.remove('active'));
+        tab.classList.add('active');
+        const filter = tab.dataset.filter;
+        let visible = 0;
+        cards.forEach(card => {
+          const match = filter === 'all' || card.dataset.category.split(' ').includes(filter);
+          card.classList.toggle('is-hidden', !match);
+          if (match) visible++;
+        });
+        portfolioEmpty.style.display = visible === 0 ? 'block' : 'none';
+        updateCount(visible);
+      });
+    });
+
+    // Lightbox
+    const lightbox = document.getElementById('lightbox');
+    const lightboxClose = document.getElementById('lightboxClose');
+    const lightboxMedia = document.getElementById('lightboxMedia');
+    const lightboxCat = document.getElementById('lightboxCat');
+    const lightboxTitle = document.getElementById('lightboxTitle');
+    const lightboxDesc = document.getElementById('lightboxDesc');
+    const lightboxLink = document.getElementById('lightboxLink');
+    let lastFocusedLightbox = null;
+
+    function openLightbox(card) {
+      const d = card.dataset;
+      const type = d.type || 'image';
+      const img = card.querySelector('img');
+
+      lightboxCat.textContent = d.category.split(' ').map(c => CATEGORY_LABELS[c] || c).join(' \u00b7 ');
+      lightboxTitle.textContent = d.title;
+      lightboxDesc.textContent = d.description || '';
+
+      if (type === 'video' && d.youtubeId) {
+        lightboxMedia.innerHTML = '<div class="lightbox-video-frame"><iframe src="https://www.youtube.com/embed/' + d.youtubeId + '?autoplay=1" title="' + d.title + '" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>';
+      } else if (type === 'video') {
+        lightboxMedia.innerHTML = '<div class="lightbox-video-frame lightbox-placeholder">Sample placeholder. Add a YouTube link to play here.</div>';
+      } else if (type === 'deck') {
+        const slides = [...card.querySelectorAll('.portfolio-card-deck img')];
+        const imgs = slides.map((sl, i) => '<img src="' + sl.getAttribute('src') + '" alt="' + d.title + ' slide ' + (i + 1) + '" />').join('');
+        lightboxMedia.innerHTML = '<div class="lightbox-deck">' + imgs + '</div><span class="portfolio-deck-counter">1 / ' + slides.length + '</span>';
+        setupDeckScroll(lightboxMedia.querySelector('.lightbox-deck'));
+      } else if (img) {
+        lightboxMedia.innerHTML = '<img src="' + img.getAttribute('src') + '" alt="' + d.title + '" />';
+      } else {
+        lightboxMedia.innerHTML = '';
+      }
+
+      if (type === 'website' && d.url) {
+        lightboxLink.style.display = 'inline-block';
+        lightboxLink.href = d.url;
+      } else {
+        lightboxLink.style.display = 'none';
+        lightboxLink.href = '#';
+      }
+
+      lastFocusedLightbox = document.activeElement;
+      lightbox.classList.add('open');
+      lightbox.setAttribute('aria-hidden', 'false');
+      document.body.style.overflow = 'hidden';
+      lightboxClose.focus();
+    }
+
+    function closeLightbox() {
+      lightbox.classList.remove('open');
+      lightbox.setAttribute('aria-hidden', 'true');
+      document.body.style.overflow = '';
+      lightboxMedia.innerHTML = '';
+      if (lastFocusedLightbox) lastFocusedLightbox.focus();
+    }
+
+    lightboxClose.addEventListener('click', closeLightbox);
+    lightbox.addEventListener('click', (e) => { if (e.target === lightbox) closeLightbox(); });
+    document.addEventListener('keydown', (e) => {
+      if (!lightbox.classList.contains('open')) return;
+      if (e.key === 'Escape') closeLightbox();
+      if (e.key === 'ArrowLeft' || e.key === 'ArrowRight') {
+        const deck = lightboxMedia.querySelector('.lightbox-deck');
+        if (deck) deck.scrollBy({ left: (e.key === 'ArrowRight' ? 1 : -1) * deck.clientWidth, behavior: 'smooth' });
+      }
+    });
+  </script>
 </body>
 </html>
