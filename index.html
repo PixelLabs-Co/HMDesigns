@@ -22,14 +22,21 @@
     nav a:hover { text-decoration: underline; text-underline-offset: 6px; }
 
     .hero { position: relative; overflow: hidden; isolation: isolate; background: var(--b); color: var(--w); min-height: 100svh; display: flex; flex-direction: column; justify-content: flex-end; padding: 0 var(--pad) var(--pad); }
-    .glow { position: absolute; inset: 0; z-index: -1; filter: blur(70px); }
-    .glow i { position: absolute; border-radius: 50%; background: radial-gradient(circle, #fff 0%, rgba(255,255,255,0) 70%); will-change: transform; }
-    .glow i:nth-child(1) { width: 60vmax; height: 60vmax; left: -10%; top: 10%; opacity: .9; animation: drift1 18s ease-in-out infinite alternate; }
-    .glow i:nth-child(2) { width: 50vmax; height: 50vmax; right: -15%; top: -10%; opacity: .6; animation: drift2 22s ease-in-out infinite alternate; }
-    .glow i:nth-child(3) { width: 45vmax; height: 45vmax; left: 30%; bottom: -25%; opacity: .75; animation: drift3 26s ease-in-out infinite alternate; }
-    @keyframes drift1 { to { transform: translate(40vw, 15vh) scale(1.2); } }
-    @keyframes drift2 { to { transform: translate(-35vw, 30vh) scale(.85); } }
-    @keyframes drift3 { to { transform: translate(-30vw, -20vh) scale(1.25); } }
+    .glow { position: absolute; inset: 0; z-index: -1; overflow: hidden; background: radial-gradient(120% 90% at 50% 110%, #1a1a1a 0%, #000 70%); }
+    .glow .swirl { position: absolute; left: 50%; top: 50%; width: 140vmax; height: 140vmax; margin: -70vmax 0 0 -70vmax; background: conic-gradient(from 0deg, #000 0%, #3a3a3a 12%, #000 25%, #5a5a5a 38%, #000 50%, #2a2a2a 63%, #000 75%, #484848 88%, #000 100%); filter: blur(90px); opacity: .55; animation: spin 60s linear infinite; }
+    .glow .orb { position: absolute; border-radius: 50%; filter: blur(60px); mix-blend-mode: screen; will-change: transform; }
+    .glow .o1 { width: 38vmax; height: 26vmax; left: 8%; top: 18%; background: radial-gradient(closest-side, rgba(255,255,255,.42), rgba(255,255,255,0)); animation: drift1 20s ease-in-out infinite alternate; }
+    .glow .o2 { width: 30vmax; height: 44vmax; right: 6%; top: 4%; background: radial-gradient(closest-side, rgba(255,255,255,.3), rgba(255,255,255,0)); animation: drift2 26s ease-in-out infinite alternate; }
+    .glow .o3 { width: 52vmax; height: 16vmax; left: 20%; top: 52%; background: radial-gradient(closest-side, rgba(255,255,255,.25), rgba(255,255,255,0)); animation: drift3 32s ease-in-out infinite alternate; }
+    .glow .ring { position: absolute; left: 50%; top: 46%; width: 34vmax; height: 34vmax; margin: -17vmax 0 0 -17vmax; border-radius: 50%; border: 1.5px solid rgba(255,255,255,.16); box-shadow: 0 0 80px 10px rgba(255,255,255,.08), inset 0 0 80px 10px rgba(255,255,255,.05); animation: breathe 14s ease-in-out infinite alternate; }
+    .glow .ring + .ring { width: 54vmax; height: 54vmax; margin: -27vmax 0 0 -27vmax; border-color: rgba(255,255,255,.08); animation-duration: 20s; animation-direction: alternate-reverse; }
+    .glow .grain { position: absolute; inset: -50%; opacity: .22; mix-blend-mode: overlay; background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='2' stitchTiles='stitch'/><feColorMatrix type='saturate' values='0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>"); animation: grain 1.2s steps(6) infinite; }
+    @keyframes spin { to { transform: rotate(360deg); } }
+    @keyframes drift1 { to { transform: translate(34vw, 12vh) rotate(25deg) scale(1.15); } }
+    @keyframes drift2 { to { transform: translate(-30vw, 28vh) rotate(-20deg) scale(.85); } }
+    @keyframes drift3 { to { transform: translate(-22vw, -26vh) rotate(12deg) scale(1.2); } }
+    @keyframes breathe { to { transform: scale(1.18); opacity: .5; } }
+    @keyframes grain { 0% { transform: translate(0,0); } 20% { transform: translate(-4%,3%); } 40% { transform: translate(3%,-5%); } 60% { transform: translate(-5%,-2%); } 80% { transform: translate(4%,4%); } 100% { transform: translate(0,0); } }
     .sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
 
     .brand img { display: block; height: 1.6rem; width: auto; }
@@ -71,7 +78,7 @@
       .grid, .about-grid { grid-template-columns: 1fr; }
       nav { gap: 1rem; } nav a { font-size: .75rem; }
     }
-    @media (prefers-reduced-motion: reduce) { .glow i { animation: none !important; } html { scroll-behavior: auto; } * { transition: none !important; } }
+    @media (prefers-reduced-motion: reduce) { .glow .swirl, .glow .orb, .glow .ring, .glow .grain { animation: none !important; } html { scroll-behavior: auto; } * { transition: none !important; } }
   </style>
 </head>
 <body>
@@ -86,7 +93,7 @@
 
   <main id="top">
     <div class="hero">
-      <div class="glow" aria-hidden="true"><i></i><i></i><i></i></div>
+      <div class="glow" aria-hidden="true"><div class="swirl"></div><div class="orb o1"></div><div class="orb o2"></div><div class="orb o3"></div><div class="ring"></div><div class="ring"></div><div class="grain"></div></div>
       <h1 class="sr-only">HM Design</h1>
       <div class="hero-meta">
         <span>Portfolio &mdash; 2026</span>
