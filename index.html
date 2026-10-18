@@ -90,6 +90,12 @@
     .lightbox-media img { width: 100%; height: auto; display: block; }
     .lightbox-video-frame { position: relative; width: 100%; aspect-ratio: 16/9; }
     .lightbox-video-frame iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+    .video-fallback { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 1rem; aspect-ratio: 16/9; background: #000 center / cover no-repeat; color: var(--w); text-decoration: none; text-transform: uppercase; letter-spacing: .12em; font-size: .8rem; position: relative; }
+    .video-fallback::before { content: ''; position: absolute; inset: 0; background: rgba(0,0,0,.45); }
+    .video-fallback > * { position: relative; }
+    .video-fallback .fallback-play { width: 76px; height: 76px; border-radius: 50%; border: 2px solid var(--w); display: flex; align-items: center; justify-content: center; transition: background .2s, color .2s; }
+    .video-fallback .fallback-play svg { width: 30px; height: 30px; margin-left: 4px; }
+    .video-fallback:hover .fallback-play { background: var(--w); color: var(--b); }
     .lightbox-placeholder { display: flex; align-items: center; justify-content: center; text-align: center; padding: 1rem; font-size: .85rem; text-transform: uppercase; letter-spacing: .12em; }
     .lightbox-body { padding: 2rem 2.5rem 2.5rem; border-top: 3px solid var(--b); }
     .lightbox-cat { font-size: .72rem; text-transform: uppercase; letter-spacing: .12em; margin-bottom: .6rem; }
@@ -476,6 +482,17 @@
     const lightboxDesc = document.getElementById('lightboxDesc');
     const lightboxLink = document.getElementById('lightboxLink');
     let lastFocusedLightbox = null;
+    let currentVideo = null;
+
+    // If the browser or host blocks the YouTube embed, show the thumbnail with a
+    // link that opens the video on YouTube instead of leaving a blank box.
+    function showVideoFallback() {
+      if (!currentVideo || !lightbox.classList.contains('open')) return;
+      lightboxMedia.innerHTML = '<a class="video-fallback" href="https://www.youtube.com/watch?v=' + currentVideo.id + '" target="_blank" rel="noopener" style="background-image:url(\'' + currentVideo.poster + '\')"><span class="fallback-play"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></span><span>Watch on YouTube</span></a>';
+    }
+    document.addEventListener('securitypolicyviolation', (e) => {
+      if (currentVideo && /youtube/.test(e.blockedURI + e.violatedDirective)) showVideoFallback();
+    });
 
     function openLightbox(card) {
       const d = card.dataset;
@@ -486,7 +503,9 @@
       lightboxTitle.textContent = d.title;
       lightboxDesc.textContent = d.description || '';
 
+      currentVideo = null;
       if (type === 'video' && d.youtubeId) {
+        currentVideo = { id: d.youtubeId, poster: img ? img.getAttribute('src') : '' };
         lightboxMedia.innerHTML = '<div class="lightbox-video-frame"><iframe src="https://www.youtube.com/embed/' + d.youtubeId + '?autoplay=1" title="' + d.title + '" referrerpolicy="strict-origin-when-cross-origin" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe></div>';
       } else if (type === 'video') {
         lightboxMedia.innerHTML = '<div class="lightbox-video-frame lightbox-placeholder">Sample placeholder. Add a YouTube link to play here.</div>';
