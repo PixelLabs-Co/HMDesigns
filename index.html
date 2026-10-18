@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>HM Design | Portfolio</title>
+  <meta name="description" content="HM Design: the personal design portfolio of Harrison." />
+  <meta name="theme-color" content="#000000" />
+  <style>
+    @font-face { font-family: 'DM Sans'; font-weight: 400; font-display: swap; src: url(fonts/dm-sans-400-latin.woff2) format('woff2'); }
+    @font-face { font-family: 'DM Sans'; font-weight: 700; font-display: swap; src: url(fonts/dm-sans-700-latin.woff2) format('woff2'); }
+    :root { --b: #000; --w: #fff; --pad: clamp(1.25rem, 4vw, 3rem); }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { background: var(--w); color: var(--b); font-family: 'DM Sans', Helvetica, Arial, sans-serif; line-height: 1.5; -webkit-font-smoothing: antialiased; }
+    a { color: inherit; }
+    .wordmark { font-weight: 700; letter-spacing: -0.04em; line-height: .85; }
+    .wordmark b { font-weight: 700; }
+    .wordmark span { font-weight: 400; letter-spacing: -0.03em; }
+
+    header { position: fixed; inset: 0 0 auto; z-index: 10; display: flex; justify-content: space-between; align-items: center; padding: 1.25rem var(--pad); mix-blend-mode: difference; color: #fff; }
+    header .wordmark { font-size: 1.5rem; text-decoration: none; }
+    nav { display: flex; gap: 1.75rem; }
+    nav a { font-size: .85rem; text-transform: uppercase; letter-spacing: .12em; text-decoration: none; }
+    nav a:hover { text-decoration: underline; text-underline-offset: 6px; }
+
+    .hero { min-height: 100svh; display: flex; flex-direction: column; justify-content: flex-end; padding: 0 var(--pad) var(--pad); }
+    .hero .wordmark { font-size: clamp(5rem, 24vw, 22rem); margin-left: -.04em; }
+    .hero .wordmark span { font-size: .38em; margin-left: .06em; }
+    .hero-meta { display: flex; justify-content: space-between; gap: 2rem; flex-wrap: wrap; margin-top: 2.5rem; padding-top: 1rem; border-top: 3px solid var(--b); font-size: .9rem; text-transform: uppercase; letter-spacing: .12em; }
+
+    section { padding: clamp(4rem, 10vw, 9rem) var(--pad); }
+    .label { font-size: .85rem; text-transform: uppercase; letter-spacing: .12em; display: flex; justify-content: space-between; border-top: 3px solid var(--b); padding-top: 1rem; margin-bottom: 2.5rem; }
+
+    .grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 0; border: 3px solid var(--b); }
+    .card { position: relative; display: flex; flex-direction: column; justify-content: space-between; aspect-ratio: 4 / 3; padding: 1.5rem; text-decoration: none; background: var(--w); color: var(--b); border: 1.5px solid var(--b); overflow: hidden; transition: background .2s, color .2s; }
+    .card img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; filter: grayscale(1) contrast(1.1); }
+    .card > * { position: relative; }
+    .card .num { font-size: .85rem; letter-spacing: .12em; }
+    .card h3 { font-size: clamp(2rem, 5vw, 4rem); line-height: .95; letter-spacing: -.04em; }
+    .card p { font-size: .85rem; text-transform: uppercase; letter-spacing: .12em; margin-top: .75rem; }
+    .card:hover, .card:focus-visible { background: var(--b); color: var(--w); outline: none; }
+    .card.has-img { color: var(--w); } .card.has-img::before { content: ''; position: absolute; inset: 0; background: rgba(0,0,0,.35); transition: background .2s; z-index: 0; } .card.has-img:hover::before { background: rgba(0,0,0,.7); }
+    .card.has-img > * { z-index: 1; }
+
+    #about { background: var(--b); color: var(--w); }
+    #about .label { border-color: var(--w); }
+    .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(2rem, 6vw, 6rem); }
+    #about h2 { font-size: clamp(2.5rem, 7vw, 6rem); line-height: .95; letter-spacing: -.04em; }
+    #about p { font-size: 1.15rem; max-width: 34em; }
+    #about p + p { margin-top: 1.25rem; }
+    .skills { list-style: none; margin-top: 2.5rem; border-top: 1px solid var(--w); }
+    .skills li { padding: .75rem 0; border-bottom: 1px solid var(--w); text-transform: uppercase; letter-spacing: .12em; font-size: .85rem; }
+
+    #contact { text-align: left; }
+    #contact a.big { display: inline-block; font-size: clamp(1.5rem, 6.2vw, 5.5rem); font-weight: 700; letter-spacing: -.04em; line-height: 1; text-decoration: none; border-bottom: 6px solid var(--b); word-break: break-word; }
+    #contact a.big:hover { background: var(--b); color: var(--w); }
+    .links { display: flex; gap: 1.75rem; margin-top: 2rem; flex-wrap: wrap; }
+    .links a { text-transform: uppercase; letter-spacing: .12em; font-size: .85rem; }
+
+    footer { display: flex; justify-content: space-between; padding: 1.5rem var(--pad); border-top: 3px solid var(--b); font-size: .8rem; text-transform: uppercase; letter-spacing: .12em; }
+
+    a:focus-visible { outline: 3px solid currentColor; outline-offset: 4px; }
+    @media (max-width: 760px) {
+      .grid, .about-grid { grid-template-columns: 1fr; }
+      nav { gap: 1rem; } nav a { font-size: .75rem; }
+    }
+    @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } * { transition: none !important; } }
+  </style>
+</head>
+<body>
+  <header>
+    <a href="#top" class="wordmark" aria-label="HM Design home"><b>HM</b> <span>design</span></a>
+    <nav aria-label="Primary">
+      <a href="#work">Work</a>
+      <a href="#about">About</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </header>
+
+  <main id="top">
+    <div class="hero">
+      <h1 class="wordmark"><b>HM</b><span>design</span></h1>
+      <div class="hero-meta">
+        <span>Portfolio &mdash; 2026</span>
+        <span>Brand &middot; Graphic &middot; Web</span>
+        <span>Available for work</span>
+      </div>
+    </div>
+
+    <section id="work">
+      <div class="label"><span>Selected Work</span><span>06 Projects</span></div>
+      <!-- To add an image to a project: drop a file in /work and add class "has-img" plus <img src="work/name.jpg" alt="..."> inside the card. -->
+      <div class="grid">
+        <a class="card" href="#contact"><span class="num">01</span><div><h3>Project One</h3><p>Branding</p></div></a>
+        <a class="card" href="#contact"><span class="num">02</span><div><h3>Project Two</h3><p>Logo Design</p></div></a>
+        <a class="card" href="#contact"><span class="num">03</span><div><h3>Project Three</h3><p>Web Design</p></div></a>
+        <a class="card" href="#contact"><span class="num">04</span><div><h3>Project Four</h3><p>Packaging</p></div></a>
+        <a class="card" href="#contact"><span class="num">05</span><div><h3>Project Five</h3><p>Editorial</p></div></a>
+        <a class="card" href="#contact"><span class="num">06</span><div><h3>Project Six</h3><p>Photography</p></div></a>
+      </div>
+    </section>
+
+    <section id="about">
+      <div class="label"><span>About</span><span>01</span></div>
+      <div class="about-grid">
+        <h2>Simple.<br>Bold.<br>Intentional.</h2>
+        <div>
+          <p>I'm Harrison, a designer who believes the strongest work says more with less. HM Design is where my personal style lives: clean type, strong contrast, and nothing extra.</p>
+          <p>Replace this with a few lines about your background and approach.</p>
+          <ul class="skills">
+            <li>Brand Identity</li><li>Graphic Design</li><li>Web Design</li><li>Photography</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact">
+      <div class="label"><span>Contact</span><span>Let's work together</span></div>
+      <a class="big" href="mailto:harrisonmitch40@icloud.com">harrisonmitch40@icloud.com</a>
+      <div class="links">
+        <a href="#">Instagram</a><a href="#">Behance</a><a href="#">LinkedIn</a>
+      </div>
+    </section>
+  </main>
+
+  <footer><span>&copy; 2026 HM Design</span><a href="#top">Back to top &uarr;</a></footer>
+</body>
+</html>
