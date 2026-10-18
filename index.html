@@ -524,11 +524,6 @@
         lightboxLink.textContent = 'Visit Live Site';
         lightboxLink.style.display = 'inline-block';
         lightboxLink.href = d.url;
-      } else if (type === 'video' && d.youtubeId) {
-        // Fallback in case an embed is blocked (some browsers, networks or previews block it).
-        lightboxLink.textContent = 'Watch on YouTube';
-        lightboxLink.style.display = 'inline-block';
-        lightboxLink.href = 'https://www.youtube.com/watch?v=' + d.youtubeId;
       } else {
         lightboxLink.style.display = 'none';
         lightboxLink.href = '#';
