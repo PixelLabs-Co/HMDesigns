@@ -86,7 +86,7 @@
     .lightbox-overlay.open .lightbox-card { transform: translateY(0); }
     .lightbox-media { width: 100%; background: #f0f0f0; display: block; position: relative; }
     .lightbox-media .portfolio-deck-arrow { opacity: .85; }
-    .lightbox-media img { width: 100%; height: auto; display: block; filter: grayscale(1); }
+    .lightbox-media img { width: 100%; height: auto; display: block; }
     .lightbox-video-frame { position: relative; width: 100%; aspect-ratio: 16/9; }
     .lightbox-video-frame iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
     .lightbox-placeholder { display: flex; align-items: center; justify-content: center; text-align: center; padding: 1rem; font-size: .85rem; text-transform: uppercase; letter-spacing: .12em; }
@@ -156,7 +156,7 @@
     </div>
 
     <section id="work">
-      <div class="label"><span>Selected Work</span><span id="workCount">06 Projects</span></div>
+      <div class="label"><span>Selected Work</span><span id="workCount">10 Projects</span></div>
       <div class="portfolio-tabs" id="portfolioTabs">
         <button class="portfolio-tab active" data-filter="all">All</button>
         <button class="portfolio-tab" data-filter="brand-design">Brand Design</button>
@@ -197,69 +197,123 @@
             the old version for a while even after publishing.
       -->
       <div class="portfolio-grid" id="portfolioGrid">
-      <div class="portfolio-card portfolio-sample" tabindex="0" role="button" data-category="video" data-type="video" data-title="Sample Video" data-description="Sample project. Replace this card with real work.">
+      <div class="portfolio-card" tabindex="0" role="button" data-category="brand-design graphic-design" data-type="deck" data-title="Adobe Creative Cloud Slide Deck" data-description="An 11-slide deck design system for Adobe Creative Cloud's AI features across Photoshop, Illustrator, and InDesign — color-coded app identities carried through consistent card layouts, type, and iconography.">
         <div class="portfolio-card-media">
-          <span class="portfolio-sample-tag">Sample</span>
-          <div class="portfolio-card-placeholder" aria-hidden="true">06</div>
-          <div class="portfolio-card-play"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></div>
+          <div class="portfolio-card-deck">
+            <img src="portfolio/adobe-design-trio/slide-01.jpg" alt="Adobe Creative Cloud Slide Deck slide 1" loading="lazy" />
+            <img src="portfolio/adobe-design-trio/slide-02.jpg" alt="Adobe Creative Cloud Slide Deck slide 2" loading="lazy" />
+            <img src="portfolio/adobe-design-trio/slide-03.jpg" alt="Adobe Creative Cloud Slide Deck slide 3" loading="lazy" />
+            <img src="portfolio/adobe-design-trio/slide-04.jpg" alt="Adobe Creative Cloud Slide Deck slide 4" loading="lazy" />
+            <img src="portfolio/adobe-design-trio/slide-05.jpg" alt="Adobe Creative Cloud Slide Deck slide 5" loading="lazy" />
+            <img src="portfolio/adobe-design-trio/slide-06.jpg" alt="Adobe Creative Cloud Slide Deck slide 6" loading="lazy" />
+            <img src="portfolio/adobe-design-trio/slide-07.jpg" alt="Adobe Creative Cloud Slide Deck slide 7" loading="lazy" />
+            <img src="portfolio/adobe-design-trio/slide-08.jpg" alt="Adobe Creative Cloud Slide Deck slide 8" loading="lazy" />
+            <img src="portfolio/adobe-design-trio/slide-09.jpg" alt="Adobe Creative Cloud Slide Deck slide 9" loading="lazy" />
+            <img src="portfolio/adobe-design-trio/slide-10.jpg" alt="Adobe Creative Cloud Slide Deck slide 10" loading="lazy" />
+            <img src="portfolio/adobe-design-trio/slide-11.jpg" alt="Adobe Creative Cloud Slide Deck slide 11" loading="lazy" />
+          </div>
+          <span class="portfolio-deck-counter">1 / 11</span>
         </div>
         <div class="portfolio-card-info">
           <div>
-            <div class="portfolio-card-cat">Video</div>
-            <div class="portfolio-card-title">Sample Video</div>
+            <div class="portfolio-card-cat">Brand Design · Graphic Design</div>
+            <div class="portfolio-card-title">Adobe Creative Cloud Slide Deck</div>
           </div>
           <span class="portfolio-featured-tag">Featured</span>
         </div>
       </div>
-      <div class="portfolio-card portfolio-sample" tabindex="0" role="button" data-category="web-design" data-type="website" data-title="Sample Website" data-description="Sample project. Replace this card with real work.">
+
+      <div class="portfolio-card" tabindex="0" role="button" data-category="graphic-design" data-title="Halcyon Catalog & Business Card" data-description="Print collateral for Halcyon, a concept tech brand — a fall product catalog laying out their six-device lineup, paired with a minimal business card.">
         <div class="portfolio-card-media">
-          <span class="portfolio-sample-tag">Sample</span>
-          <div class="portfolio-card-placeholder" aria-hidden="true">05</div>
+          <img src="portfolio/halcyon-catalog.jpg" alt="Halcyon Catalog & Business Card" loading="lazy" />
+        </div>
+        <div class="portfolio-card-info">
+          <div class="portfolio-card-cat">Graphic Design</div>
+          <div class="portfolio-card-title">Halcyon Catalog & Business Card</div>
+        </div>
+      </div>
+
+      <div class="portfolio-card" tabindex="0" role="button" data-category="web-design" data-type="website" data-title="Pixel Labs" data-description="Design and development of the Pixel Labs studio site itself — brand identity, portfolio, pricing, and a Formspree-backed contact system, built and hosted as a fast, fully custom static site." data-url="https://www.pixelabs.co/">
+        <div class="portfolio-card-media">
+          <img src="portfolio/pixelabs-homepage.jpg" alt="Pixel Labs homepage" loading="lazy" />
           <div class="portfolio-card-badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 3h7v7M21 3l-9 9M21 14v5a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2h5"/></svg></div>
         </div>
         <div class="portfolio-card-info">
           <div class="portfolio-card-cat">Web Design</div>
-          <div class="portfolio-card-title">Sample Website</div>
+          <div class="portfolio-card-title">Pixel Labs</div>
         </div>
       </div>
-      <div class="portfolio-card portfolio-sample" tabindex="0" role="button" data-category="photography" data-title="Sample Photography" data-description="Sample project. Replace this card with real work.">
+
+      <div class="portfolio-card" tabindex="0" role="button" data-category="graphic-design" data-title="Novapop Logo" data-description="Primary logo lockup for Novapop, pairing a bold spark-and-circle mark with a rounded wordmark.">
         <div class="portfolio-card-media">
-          <span class="portfolio-sample-tag">Sample</span>
-          <div class="portfolio-card-placeholder" aria-hidden="true">04</div>
-        </div>
-        <div class="portfolio-card-info">
-          <div class="portfolio-card-cat">Photography</div>
-          <div class="portfolio-card-title">Sample Photography</div>
-        </div>
-      </div>
-      <div class="portfolio-card portfolio-sample" tabindex="0" role="button" data-category="graphic-design" data-title="Sample Logo" data-description="Sample project. Replace this card with real work.">
-        <div class="portfolio-card-media">
-          <span class="portfolio-sample-tag">Sample</span>
-          <div class="portfolio-card-placeholder" aria-hidden="true">03</div>
+          <img src="portfolio/novapop-logo.jpg" alt="Novapop Logo" loading="lazy" />
         </div>
         <div class="portfolio-card-info">
           <div class="portfolio-card-cat">Graphic Design</div>
-          <div class="portfolio-card-title">Sample Logo</div>
+          <div class="portfolio-card-title">Novapop Logo</div>
         </div>
       </div>
-      <div class="portfolio-card portfolio-sample" tabindex="0" role="button" data-category="brand-design" data-title="Sample Branding" data-description="Sample project. Replace this card with real work.">
+
+      <div class="portfolio-card" tabindex="0" role="button" data-category="brand-design" data-title="Novapop Branding" data-description="Brand identity for Novapop, including logo, app icon, wordmark lockup, and merch and packaging mockups built around a bold 'pop' motif.">
         <div class="portfolio-card-media">
-          <span class="portfolio-sample-tag">Sample</span>
-          <div class="portfolio-card-placeholder" aria-hidden="true">02</div>
+          <img src="portfolio/novapop-branding.jpg" alt="Novapop Branding" loading="lazy" />
         </div>
         <div class="portfolio-card-info">
           <div class="portfolio-card-cat">Brand Design</div>
-          <div class="portfolio-card-title">Sample Branding</div>
+          <div class="portfolio-card-title">Novapop Branding</div>
         </div>
       </div>
-      <div class="portfolio-card portfolio-sample" tabindex="0" role="button" data-category="brand-design graphic-design" data-title="Sample Identity System" data-description="Sample project. Replace this card with real work.">
+
+      <div class="portfolio-card" tabindex="0" role="button" data-category="web-design" data-type="website" data-title="Send Slater Six" data-description="Website design for Send Slater Six, a ministry site sharing the Slater family's work training leaders in Africa." data-url="https://www.sendslatersix.com">
         <div class="portfolio-card-media">
-          <span class="portfolio-sample-tag">Sample</span>
-          <div class="portfolio-card-placeholder" aria-hidden="true">01</div>
+          <img src="portfolio/sendslatersix-homepage.jpg" alt="Send Slater Six homepage" loading="lazy" />
+          <div class="portfolio-card-badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 3h7v7M21 3l-9 9M21 14v5a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2h5"/></svg></div>
         </div>
         <div class="portfolio-card-info">
-          <div class="portfolio-card-cat">Brand Design · Graphic Design</div>
-          <div class="portfolio-card-title">Sample Identity System</div>
+          <div class="portfolio-card-cat">Web Design</div>
+          <div class="portfolio-card-title">Send Slater Six</div>
+        </div>
+      </div>
+
+      <div class="portfolio-card" tabindex="0" role="button" data-category="graphic-design" data-title="Northcoast Coffee Co. Primary Logo" data-description="Primary logo mark for Northcoast Coffee Co., pairing a forest-and-tideline emblem with a classic serif wordmark.">
+        <div class="portfolio-card-media">
+          <img src="portfolio/northcoast-coffee-co-logo.jpg" alt="Northcoast Coffee Co. Primary Logo" loading="lazy" />
+        </div>
+        <div class="portfolio-card-info">
+          <div class="portfolio-card-cat">Graphic Design</div>
+          <div class="portfolio-card-title">Northcoast Coffee Co. Primary Logo</div>
+        </div>
+      </div>
+
+      <div class="portfolio-card" tabindex="0" role="button" data-category="brand-design" data-title="Northcoast Coffee Co." data-description="Brand identity for Northcoast Coffee Co., including logo, cup and packaging design, and social promo graphics.">
+        <div class="portfolio-card-media">
+          <img src="portfolio/northcoast-coffee-co-packaging.jpg" alt="Northcoast Coffee Co." loading="lazy" />
+        </div>
+        <div class="portfolio-card-info">
+          <div class="portfolio-card-cat">Brand Design</div>
+          <div class="portfolio-card-title">Northcoast Coffee Co.</div>
+        </div>
+      </div>
+
+      <div class="portfolio-card" tabindex="0" role="button" data-category="video" data-type="video" data-title="Travel Maui" data-youtube-id="dJkl4D4vLn0">
+        <div class="portfolio-card-media">
+          <img src="portfolio/travel-maui-thumb.jpg" alt="Travel Maui" loading="lazy" />
+          <div class="portfolio-card-play"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></div>
+        </div>
+        <div class="portfolio-card-info">
+          <div class="portfolio-card-cat">Video</div>
+          <div class="portfolio-card-title">Travel Maui</div>
+        </div>
+      </div>
+
+      <div class="portfolio-card" tabindex="0" role="button" data-category="video" data-type="video" data-title="Welcome to Pixel Labs" data-youtube-id="qwxjg__--AI">
+        <div class="portfolio-card-media">
+          <img src="portfolio/welcome-to-pixel-labs-thumb.jpg" alt="Welcome to Pixel Labs" loading="lazy" />
+          <div class="portfolio-card-play"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></div>
+        </div>
+        <div class="portfolio-card-info">
+          <div class="portfolio-card-cat">Video</div>
+          <div class="portfolio-card-title">Welcome to Pixel Labs</div>
         </div>
       </div>
       </div>
