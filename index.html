@@ -487,7 +487,7 @@
       lightboxDesc.textContent = d.description || '';
 
       if (type === 'video' && d.youtubeId) {
-        lightboxMedia.innerHTML = '<div class="lightbox-video-frame"><iframe src="https://www.youtube.com/embed/' + d.youtubeId + '?autoplay=1" title="' + d.title + '" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>';
+        lightboxMedia.innerHTML = '<div class="lightbox-video-frame"><iframe src="https://www.youtube.com/embed/' + d.youtubeId + '?autoplay=1" title="' + d.title + '" referrerpolicy="strict-origin-when-cross-origin" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>';
       } else if (type === 'video') {
         lightboxMedia.innerHTML = '<div class="lightbox-video-frame lightbox-placeholder">Sample placeholder. Add a YouTube link to play here.</div>';
       } else if (type === 'deck') {
@@ -502,8 +502,14 @@
       }
 
       if (type === 'website' && d.url) {
+        lightboxLink.textContent = 'Visit Live Site';
         lightboxLink.style.display = 'inline-block';
         lightboxLink.href = d.url;
+      } else if (type === 'video' && d.youtubeId) {
+        // Fallback in case an embed is blocked (some browsers, networks or previews block it).
+        lightboxLink.textContent = 'Watch on YouTube';
+        lightboxLink.style.display = 'inline-block';
+        lightboxLink.href = 'https://www.youtube.com/watch?v=' + d.youtubeId;
       } else {
         lightboxLink.style.display = 'none';
         lightboxLink.href = '#';
