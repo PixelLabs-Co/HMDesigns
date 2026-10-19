@@ -12,7 +12,7 @@
   <style>
     @font-face { font-family: 'DM Sans'; font-weight: 400; font-display: swap; src: url(fonts/dm-sans-400-latin.woff2) format('woff2'); }
     @font-face { font-family: 'DM Sans'; font-weight: 700; font-display: swap; src: url(fonts/dm-sans-700-latin.woff2) format('woff2'); }
-    :root { --b: #000; --w: #fff; --pad: clamp(1.25rem, 4vw, 3rem); --r: 10px; --r-sm: 6px; --line: 1px; --sheet: clamp(22px, 3.2vw, 40px); --gap: clamp(2.75rem, 6vw, 5.5rem); }
+    :root { --b: #000; --w: #fff; --pad: clamp(1.25rem, 4vw, 3rem); --r: 10px; --r-sm: 6px; --line: 1px; --sheet: clamp(22px, 3.2vw, 40px); --gap: clamp(2.25rem, 5vw, 4.5rem); }
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     html { scroll-behavior: smooth; scroll-padding-top: 4rem; }
     body { background: var(--w); color: var(--b); font-family: 'DM Sans', Helvetica, Arial, sans-serif; line-height: 1.5; -webkit-font-smoothing: antialiased; }
@@ -41,7 +41,7 @@
     .hero-meta { display: flex; justify-content: space-between; gap: 2rem; flex-wrap: wrap; margin-top: 2.5rem; padding-top: 1rem; border-top: var(--line) solid rgba(255,255,255,.35); font-size: .9rem; letter-spacing: -.01em;  }
 
     /* Sections are stacked "sheets": each has rounded top corners and slides over the one before it. */
-    main > section { position: relative; margin-top: calc(var(--sheet) * -1); border-radius: var(--sheet) var(--sheet) 0 0; padding: calc(var(--gap) + var(--sheet)) var(--pad) calc(var(--gap) + var(--sheet)); background: var(--w); }
+    main > section { position: relative; margin-top: calc(var(--sheet) * -1); border-radius: var(--sheet) var(--sheet) 0 0; padding: var(--gap) var(--pad) calc(var(--gap) + var(--sheet)); background: var(--w); }
     #shop { background: #f3f3f3; }
     #contact { padding-bottom: var(--gap); }
     .label { font-size: .9rem; letter-spacing: -.01em; display: flex; justify-content: space-between; align-items: baseline; gap: 1rem; margin-bottom: 2.5rem; }
