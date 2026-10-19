@@ -45,15 +45,15 @@
     .portfolio-tabs { display: flex; flex-wrap: wrap; gap: .75rem; margin-bottom: 2rem; }
     .portfolio-tab { font: inherit; font-size: .85rem; letter-spacing: -.01em; color: var(--b); background: var(--w); border: var(--line) solid var(--b); border-radius: 999px; padding: .55rem 1.1rem; cursor: pointer; transition: background .2s, color .2s; }
     .portfolio-tab:hover, .portfolio-tab.active { background: var(--b); color: var(--w); }
-    .portfolio-grid { columns: 2; column-gap: clamp(2rem, 5vw, 4.5rem); counter-reset: proj; }
-    .portfolio-card { break-inside: avoid; margin-bottom: clamp(2.5rem, 6vw, 5rem); background: none; cursor: pointer; display: block; counter-increment: proj; }
+    .portfolio-grid { columns: 2; column-gap: clamp(1rem, 2vw, 1.5rem); counter-reset: proj; }
+    .portfolio-card { break-inside: avoid; margin-bottom: clamp(1.25rem, 2.5vw, 2rem); background: none; cursor: pointer; display: block; counter-increment: proj; }
     .portfolio-card.is-hidden { display: none; }
     .portfolio-card:focus-visible { outline: 2px solid var(--b); outline-offset: 8px; border-radius: var(--r); }
     .portfolio-card-media { position: relative; overflow: hidden; background: #f2f2f2; border-radius: var(--r); }
     .portfolio-card img { width: 100%; height: auto; display: block; transition: transform .6s cubic-bezier(.2,.7,.2,1); }
     .portfolio-card:hover img { transform: scale(1.03); }
     .portfolio-card-placeholder { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; font-size: clamp(4rem, 9vw, 7rem); font-weight: 700; letter-spacing: -.05em; color: var(--b); }
-    .portfolio-card-info { display: flex; align-items: flex-start; gap: 1rem; padding: 1rem 0 0; }
+    .portfolio-card-info { display: flex; align-items: flex-start; gap: .75rem; padding: .75rem 0 0; }
     .portfolio-card-info::before { content: counter(proj, decimal-leading-zero); font-size: .75rem; letter-spacing: .05em; padding-top: .3rem; min-width: 2rem; opacity: .5; }
     .portfolio-card-info > div:first-of-type { flex: 1; }
     .portfolio-card-cat { font-size: .8rem; letter-spacing: -.005em; margin-bottom: .3rem; opacity: .6; }
