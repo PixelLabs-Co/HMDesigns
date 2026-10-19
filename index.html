@@ -309,17 +309,21 @@
       .nav-social { margin-left: .25rem; gap: .1rem; }
       nav a.in-badge span { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
     }
-    /* Phones: name + social icons on the first row, the four links on the second. */
+    /* Phones: name + social icons on the first row; the four links sit below as a soft segmented track,
+       with the current section lifted onto a light pill. */
     @media (max-width: 599px) {
-      html { scroll-padding-top: 5.4rem; }
-      header { display: grid; grid-template-columns: 1fr auto; grid-template-areas: "brand social" "links links"; align-items: center; gap: .1rem .5rem; padding: .6rem var(--pad) .3rem; }
+      html { scroll-padding-top: 6.9rem; }
+      header { display: grid; grid-template-columns: 1fr auto; grid-template-areas: "brand social" "links links"; align-items: center; gap: .7rem .5rem; padding: .75rem var(--pad) .7rem; }
       nav { display: contents; }
       .brand { grid-area: brand; font-size: clamp(1.1rem, 5.3vw, 1.5rem); line-height: 1; }
       .brand span { display: inline; }
-      .nav-social { grid-area: social; justify-self: end; margin: 0; gap: .35rem; }
+      .nav-social { grid-area: social; justify-self: end; margin: 0; gap: .4rem; }
       nav a.in-badge { --tile: 28px; padding: 0; }
-      .nav-links { grid-area: links; justify-content: space-between; margin-inline: -.5rem; gap: 0; }
-      nav a { padding: .5rem .5rem; font-size: .92rem; }
+      .nav-links { grid-area: links; gap: 0; padding: 3px; border-radius: 999px; background: rgba(0,0,0,.065); }
+      .nav-links a { flex: 1; text-align: center; padding: .5rem .2rem; border-radius: 999px; font-size: .9rem; transition: background .25s, color .25s, box-shadow .25s; }
+      .nav-links a:hover { background: transparent; color: var(--b); }
+      .nav-links a.active, .nav-links a.active:hover { background: var(--paper-3); color: var(--b); box-shadow: 0 1px 2px rgba(0,0,0,.14), 0 0 0 .5px rgba(0,0,0,.05); }
+      @media (hover: hover) { .nav-links a:not(.active):hover { background: var(--b); color: var(--w); } }
     }
     @media (prefers-reduced-motion: reduce) { .glow i, .grain, .about-avail .dot, .hero-meta, .collage, .collage .track, .cart-glyph, .cart-wheel, .cart-item { animation: none !important; } html { scroll-behavior: auto; } * { transition: none !important; } }
     </style>
