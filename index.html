@@ -183,16 +183,27 @@
     nav a.active:hover { background: var(--b); }
     .spot { position: absolute; inset: 0; z-index: -1; pointer-events: none; opacity: 0; transition: opacity .6s ease; background: radial-gradient(520px circle at var(--mx, 50%) var(--my, 50%), rgba(255,255,255,.16), transparent 65%); }
     .hero:hover .spot { opacity: 1; }
-    .hero-meta { animation: rise .9s .55s cubic-bezier(.2,.7,.2,1) both; }
-    .hero-copy > * { animation: rise .9s cubic-bezier(.2,.7,.2,1) both; }
-    .hero-copy > :nth-child(2) { animation-delay: .1s; } .hero-copy > :nth-child(3) { animation-delay: .25s; } .hero-copy > :nth-child(4) { animation-delay: .4s; }
-    .hero-copy { margin-top: 7rem; }
-    .hero-eyebrow { font-size: .95rem; letter-spacing: -.01em; opacity: .7; margin-bottom: 1.25rem; }
-    .hero h1 { font-size: clamp(3.25rem, 10.5vw, 10rem); line-height: .9; letter-spacing: -.06em; font-weight: 700; -webkit-text-stroke: .012em currentColor; max-width: 9em; }
-    .hero h1 .light { font-weight: 400; -webkit-text-stroke: 0; letter-spacing: -.055em; }
-    .hero-sub { font-size: clamp(1.05rem, 1.6vw, 1.35rem); letter-spacing: -.015em; max-width: 29em; margin-top: 1.75rem; opacity: .8; }
-    .hero-cta { display: flex; flex-wrap: wrap; gap: .75rem; margin-top: 2rem; }
+    .hero-meta { animation: rise .9s .5s cubic-bezier(.2,.7,.2,1) both; }
+    @keyframes draw { from { stroke-dashoffset: 1; } }
+    @keyframes bob { 50% { transform: translateY(-10px); } }
+    @keyframes pop { from { opacity: 0; transform: translateY(24px) scale(.92); } }
     @keyframes rise { from { opacity: 0; transform: translateY(14px); } }
+    /* Hero artwork: a slow-moving collection of bold, minimal branding visuals (poster, mark, cards, packaging, patterns). */
+    .collage { --g: clamp(10px, 1.2vw, 18px); position: absolute; z-index: 0; top: -12%; bottom: -12%; right: -3%; width: min(64vw, 1000px); display: flex; gap: var(--g); rotate: -9deg; pointer-events: none;
+      -webkit-mask-image: linear-gradient(to right, transparent 0, #000 30%), linear-gradient(to bottom, transparent 0, #000 16%, #000 84%, transparent 100%);
+      mask-image: linear-gradient(to right, transparent 0, #000 30%), linear-gradient(to bottom, transparent 0, #000 16%, #000 84%, transparent 100%);
+      -webkit-mask-composite: source-in; mask-composite: intersect; animation: fade 1.4s .2s both; }
+    .collage-col { flex: 1 1 0; min-width: 0; }
+    .collage .track { display: flex; flex-direction: column; gap: var(--g); animation: climb var(--dur, 90s) linear infinite; animation-delay: calc(var(--dur, 90s) * -.35); will-change: transform; }
+    .collage-col.rev .track { animation-direction: reverse; animation-delay: calc(var(--dur, 90s) * -.6); }
+    .collage img { display: block; width: 100%; height: auto; border-radius: var(--r); }
+    @keyframes climb { to { transform: translateY(calc(-50% - var(--g) / 2)); } }
+    @keyframes fade { from { opacity: 0; } }
+    .hero::after { content: ''; position: absolute; left: 0; right: 0; bottom: 0; height: 38%; z-index: 1; pointer-events: none; background: linear-gradient(to top, rgba(0,0,0,.9), rgba(0,0,0,0)); }
+    .hero-meta { position: relative; z-index: 2; }
+    @media (max-width: 760px) {
+      .collage { width: 135vw; right: -30vw; top: -8%; bottom: -8%; -webkit-mask-image: linear-gradient(to bottom, transparent 0, #000 14%, #000 80%, transparent 100%); mask-image: linear-gradient(to bottom, transparent 0, #000 14%, #000 80%, transparent 100%); -webkit-mask-composite: source-over; mask-composite: add; }
+    }
     .portfolio-card-media { transition: box-shadow .5s ease; }
     .portfolio-card:hover .portfolio-card-media, .portfolio-card:focus-visible .portfolio-card-media { box-shadow: 0 18px 40px -12px rgba(0,0,0,.28); }
     .portfolio-tab:active, .links a:active, .lightbox-link:active { transform: scale(.97); }
@@ -238,7 +249,7 @@
     @media (hover: none) { .portfolio-deck-arrow { opacity: .85; } }
     @media (max-width: 360px) { nav a { padding: .75rem .4rem; font-size: .8rem; } .brand img { height: 1.75rem; } }
     @media (max-width: 340px) { header { padding-inline: 1rem; } nav a { padding: .75rem .3rem; font-size: .75rem; } .brand img { height: 1.5rem; } }
-    @media (prefers-reduced-motion: reduce) { .glow i, .grain, .about-avail .dot, .hero-copy > *, .hero-meta { animation: none !important; } html { scroll-behavior: auto; } * { transition: none !important; } }
+    @media (prefers-reduced-motion: reduce) { .glow i, .grain, .about-avail .dot, .hero-meta, .collage, .collage .track { animation: none !important; } html { scroll-behavior: auto; } * { transition: none !important; } }
     </style>
 </head>
 <body>
@@ -257,14 +268,11 @@
       <div class="glow" aria-hidden="true"><i></i><i></i><i></i></div>
       <div class="grain" aria-hidden="true"></div>
       <div class="spot" aria-hidden="true"></div>
-      <div class="hero-copy">
-        <p class="hero-eyebrow">Brand &amp; marketing design</p>
-        <h1><span class="sr-only">HM Design: </span>Brands people <span class="light">remember.</span></h1>
-        <p class="hero-sub">Brand identity, marketing design and websites for individuals and organizations. Clear, bold and built to last.</p>
-        <div class="hero-cta">
-          <a class="btn-light" href="#contact">Start a project</a>
-          <a class="btn-ghost" href="#work">View work</a>
-        </div>
+      <h1 class="sr-only">HM Design</h1>
+      <div class="collage" aria-hidden="true">
+        <div class="collage-col" style="--dur:86s"><div class="track"><img src="hero/01.webp" alt="" width="600" height="750" decoding="async" /><img src="hero/06.webp" alt="" width="600" height="600" decoding="async" /><img src="hero/03.webp" alt="" width="600" height="750" decoding="async" /><img src="hero/09.webp" alt="" width="600" height="600" decoding="async" /><img src="hero/01.webp" alt="" width="600" height="750" decoding="async" /><img src="hero/06.webp" alt="" width="600" height="600" decoding="async" /><img src="hero/03.webp" alt="" width="600" height="750" decoding="async" /><img src="hero/09.webp" alt="" width="600" height="600" decoding="async" /></div></div>
+        <div class="collage-col rev" style="--dur:104s"><div class="track"><img src="hero/02.webp" alt="" width="600" height="600" decoding="async" /><img src="hero/07.webp" alt="" width="600" height="750" decoding="async" /><img src="hero/05.webp" alt="" width="600" height="600" decoding="async" /><img src="hero/10.webp" alt="" width="600" height="750" decoding="async" /><img src="hero/02.webp" alt="" width="600" height="600" decoding="async" /><img src="hero/07.webp" alt="" width="600" height="750" decoding="async" /><img src="hero/05.webp" alt="" width="600" height="600" decoding="async" /><img src="hero/10.webp" alt="" width="600" height="750" decoding="async" /></div></div>
+        <div class="collage-col" style="--dur:92s"><div class="track"><img src="hero/04.webp" alt="" width="600" height="750" decoding="async" /><img src="hero/08.webp" alt="" width="600" height="600" decoding="async" /><img src="hero/11.webp" alt="" width="600" height="750" decoding="async" /><img src="hero/12.webp" alt="" width="600" height="600" decoding="async" /><img src="hero/04.webp" alt="" width="600" height="750" decoding="async" /><img src="hero/08.webp" alt="" width="600" height="600" decoding="async" /><img src="hero/11.webp" alt="" width="600" height="750" decoding="async" /><img src="hero/12.webp" alt="" width="600" height="600" decoding="async" /></div></div>
       </div>
       <div class="hero-meta">
         <span>Brand &middot; Graphic &middot; Web &middot; Video &middot; Photo</span>
