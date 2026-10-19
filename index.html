@@ -232,21 +232,22 @@
     .shop-links { margin-top: 2.5rem; }
 
     /* LinkedIn badge: the one brand colour besides the lime availability dot. */
-    .in-badge { --in-blue: #0A66C2; --tile: 24px; --inset: 4px; display: inline-flex; align-items: center; gap: .55rem; padding: var(--inset) calc(var(--inset) * 3.5) var(--inset) var(--inset); border: var(--line) solid rgba(10,102,194,.4); border-radius: 999px; background: rgba(10,102,194,.09); color: var(--b); font-size: .9rem; font-weight: 700; letter-spacing: -.02em; line-height: 1; text-decoration: none; white-space: nowrap; transition: background .2s, color .2s, border-color .2s, transform .15s; }
+    .in-badge { --in-blue: #0A66C2; --tile: 22px; --h: 2.15rem; --px: .85rem; display: inline-flex; align-items: center; justify-content: center; gap: .4rem; box-sizing: border-box; height: var(--h); padding: 0 var(--px); border: var(--line) solid rgba(10,102,194,.4); border-radius: 999px; background: rgba(10,102,194,.09); color: var(--b); font-size: .9rem; font-weight: 700; letter-spacing: -.02em; line-height: 1; text-decoration: none; white-space: nowrap; transition: background .2s, color .2s, border-color .2s, transform .15s; }
     .in-badge svg { width: var(--tile); height: var(--tile); flex: none; display: block; }
+    .in-badge > span { position: relative; top: .075em; }  /* optical centring: the font's cap height sits high in its line box */
     .in-badge .in-tile { fill: var(--in-blue); transition: fill .2s; }
     .in-badge .in-glyph { fill: #fff; transition: fill .2s; }
     .in-badge:hover { background: var(--in-blue); border-color: var(--in-blue); color: #fff; }
     .in-badge:hover .in-tile { fill: #fff; }
     .in-badge:hover .in-glyph { fill: var(--in-blue); }
     .in-badge:active { transform: scale(.97); }
-    nav a.in-badge { margin-left: .5rem; font-size: .85rem; }
+    nav a.in-badge { margin-left: .5rem; font-size: .85rem; padding: 0 var(--px); }
     nav a.in-badge:hover { background: var(--in-blue); color: #fff; }
-    .in-badge.in-dark { --tile: 34px; --inset: 6px; padding-right: 1.3rem; font-size: .95rem; border-color: rgba(255,255,255,.3); background: rgba(255,255,255,.08); color: var(--w); }
+    .in-badge.in-dark { --tile: 28px; --h: 3.05rem; --px: 1.2rem; gap: .5rem; font-size: .95rem; border-color: rgba(255,255,255,.3); background: rgba(255,255,255,.08); color: var(--w); }
     .in-badge.in-dark:hover { background: var(--in-blue); border-color: var(--in-blue); color: #fff; }
     .in-badge.in-dark .in-tile { fill: var(--in-blue); }
     .in-badge.in-dark:hover .in-tile { fill: #fff; }
-    .in-badge.in-lg { --tile: 32px; --inset: 6px; padding-right: 1.3rem; font-size: .95rem; gap: .65rem; }
+    .in-badge.in-lg { --tile: 28px; --h: 2.9rem; --px: 1.3rem; font-size: .95rem; gap: .55rem; }
     .contact-social { margin-top: 1.25rem; }
 
     a:focus-visible { outline: 2px solid currentColor; outline-offset: 4px; border-radius: var(--r-sm); }
@@ -261,7 +262,7 @@
       .lightbox-overlay { padding: 1rem; } .lightbox-body { padding: 1.5rem; } .lightbox-title { font-size: 1.5rem; }
       .portfolio-card-title { font-size: 1.2rem; }
       nav { gap: 0; } nav a { font-size: .85rem; padding: .75rem .55rem; }
-      nav a.in-badge { --tile: 26px; margin-left: .15rem; padding: .2rem; gap: 0; border-color: transparent; background: transparent; }
+      nav a.in-badge { --tile: 26px; --px: .2rem; height: auto; margin-left: .15rem; padding: .2rem; gap: 0; border-color: transparent; background: transparent; }
       nav a.in-badge span { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
       .hero-meta { gap: .75rem 2rem; font-size: 1rem; }
       .lightbox-close { width: 44px; height: 44px; }
