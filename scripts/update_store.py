@@ -194,7 +194,7 @@ def main():
       <div class="shop-grid">
 {cards}
       </div>
-      <div class="links shop-links"><a href="{STORE_URL}" target="_blank" rel="noopener">{CART}<span>Visit the full store</span> &nearr;</a></div>
+      <div class="links shop-links"><a href="{STORE_URL}" target="_blank" rel="noopener">{CART}<span>Visit my Gumroad Store</span> &nearr;</a></div>
       {END}'''
     src = open(INDEX, encoding='utf-8').read()
     pat = re.compile(re.escape(START) + r'.*?' + re.escape(END), re.S)
