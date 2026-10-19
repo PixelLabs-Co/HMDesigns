@@ -81,7 +81,8 @@
     .portfolio-featured-tag { flex-shrink: 0; background: var(--b); color: var(--w); margin-top: .2rem; }
     .portfolio-card-deck, .lightbox-deck { display: flex; overflow-x: auto; scroll-snap-type: x mandatory; -webkit-overflow-scrolling: touch; scrollbar-width: none; overflow-anchor: none; }
         .portfolio-card-deck::-webkit-scrollbar, .lightbox-deck::-webkit-scrollbar { display: none; }
-    .portfolio-card-deck img, .lightbox-deck img { flex: 0 0 100%; min-width: 0; scroll-snap-align: start; }
+    .portfolio-card-deck img, .lightbox-deck img { flex: 0 0 100%; min-width: 0; scroll-snap-align: start; scroll-snap-stop: always; -webkit-user-drag: none; user-select: none; }
+    .portfolio-card-deck.dragging, .lightbox-deck.dragging { scroll-snap-type: none; cursor: grabbing; }
     .lightbox-deck img { width: 100%; height: auto; display: block; }
     .portfolio-card:hover .portfolio-card-deck img { transform: none; }
     .portfolio-deck-counter { position: absolute; bottom: 1rem; right: 1rem; font-size: .65rem; letter-spacing: .1em; background: var(--b); color: var(--w); padding: .3rem .55rem; border-radius: 999px; pointer-events: none; }
@@ -592,17 +593,17 @@
       const parent = deckEl.parentElement;
       const counter = parent.querySelector('.portfolio-deck-counter');
       const total = deckEl.children.length;
+      // Always move to an exact slide, never by a raw pixel amount.
+      const goTo = (i) => deckEl.scrollTo({ left: Math.max(0, Math.min(total - 1, i)) * deckEl.clientWidth, behavior: 'smooth' });
+      const step = (dir) => { deckEl.dataset.userInteracted = '1'; goTo(Math.round(deckEl.scrollLeft / deckEl.clientWidth) + dir); };
+      deckEl._step = step;
       const arrow = (dir, label, path) => {
         const b = document.createElement('button');
         b.className = 'portfolio-deck-arrow ' + (dir < 0 ? 'prev' : 'next');
         b.type = 'button';
         b.setAttribute('aria-label', label);
         b.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="' + path + '"/></svg>';
-        b.addEventListener('click', (e) => {
-          e.stopPropagation();
-          deckEl.dataset.userInteracted = '1';
-          deckEl.scrollBy({ left: dir * deckEl.clientWidth, behavior: 'smooth' });
-        });
+        b.addEventListener('click', (e) => { e.stopPropagation(); step(dir); });
         parent.appendChild(b);
       };
       arrow(-1, 'Previous slide', 'M15 18l-6-6 6-6');
@@ -614,6 +615,60 @@
         const idx = Math.min(Math.round(deckEl.scrollLeft / deckEl.clientWidth) + 1, total);
         if (counter) counter.textContent = idx + ' / ' + total;
       });
+
+      // Mouse wheel / trackpad: one slide per horizontal gesture. (A plain wheel tick is
+      // smaller than half a slide, so native scroll-snap would bounce straight back.)
+      let wheelLocked = false, wheelTimer = 0;
+      deckEl.addEventListener('wheel', (e) => {
+        const h = Math.abs(e.deltaX) > Math.abs(e.deltaY) ? e.deltaX : (e.shiftKey ? e.deltaY : 0);
+        if (!h) return;                      // vertical scrolling still scrolls the page
+        e.preventDefault();
+        clearTimeout(wheelTimer);
+        wheelTimer = setTimeout(() => { wheelLocked = false; }, 90);
+        if (wheelLocked || Math.abs(h) < 4) return;
+        wheelLocked = true;
+        step(h > 0 ? 1 : -1);
+      }, { passive: false });
+
+      // Mouse drag (touch already swipes natively). A drag never counts as a click.
+      let drag = null, dragged = false;
+      deckEl.addEventListener('dragstart', (e) => e.preventDefault());
+      deckEl.addEventListener('pointerdown', (e) => {
+        if (e.pointerType !== 'mouse' || e.button !== 0) return;
+        drag = { x: e.clientX, left: deckEl.scrollLeft, moved: false };
+      });
+      deckEl.addEventListener('pointermove', (e) => {
+        if (!drag) return;
+        const dx = e.clientX - drag.x;
+        if (!drag.moved && Math.abs(dx) > 6) { drag.moved = true; deckEl.classList.add('dragging'); deckEl.setPointerCapture(e.pointerId); }
+        if (drag.moved) deckEl.scrollLeft = drag.left - dx;
+      });
+      const endDrag = (e) => {
+        if (!drag) return;
+        const d = drag; drag = null;
+        if (!d.moved) return;
+        const w = deckEl.clientWidth, dx = e.clientX - d.x;
+        let i = Math.round(d.left / w);
+        if (Math.abs(dx) > w * 0.15) i += dx < 0 ? 1 : -1;
+        goTo(i);                              // snapping stays off until the slide settles, so it never jumps back
+        const settle = () => deckEl.classList.remove('dragging');
+        if ('onscrollend' in window) deckEl.addEventListener('scrollend', settle, { once: true });
+        setTimeout(settle, 1000);
+        dragged = true; setTimeout(() => { dragged = false; }, 0);
+      };
+      deckEl.addEventListener('pointerup', endDrag);
+      deckEl.addEventListener('pointercancel', endDrag);
+      deckEl.addEventListener('click', (e) => { if (dragged) { e.stopPropagation(); e.preventDefault(); } }, true);
+
+      // Lazy slides load shortly before the card is on screen, so swiping never lands on a blank slide.
+      const lazy = deckEl.querySelectorAll('img[loading="lazy"]');
+      const warm = () => lazy.forEach((img) => { img.loading = 'eager'; });
+      if (lazy.length) {
+        if ('IntersectionObserver' in window) {
+          const io = new IntersectionObserver((en) => { if (en.some((x) => x.isIntersecting)) { warm(); io.disconnect(); } }, { rootMargin: '800px 0px' });
+          io.observe(deckEl);
+        } else warm();
+      }
     }
     document.querySelectorAll('.portfolio-card-deck').forEach(setupDeckScroll);
 
@@ -634,7 +689,10 @@
     const cards = document.querySelectorAll('.portfolio-card');
     cards.forEach(card => {
       card.addEventListener('click', (e) => { if (!e.target.closest('.portfolio-deck-arrow')) openLightbox(card); });
-      card.addEventListener('keydown', (e) => { if (e.target === card && (e.key === 'Enter' || e.key === ' ')) { e.preventDefault(); openLightbox(card); } });
+      card.addEventListener('keydown', (e) => {
+        const deck = e.target === card && card.querySelector('.portfolio-card-deck');
+        if (deck && deck._step && (e.key === 'ArrowRight' || e.key === 'ArrowLeft')) { e.preventDefault(); deck._step(e.key === 'ArrowRight' ? 1 : -1); return; }
+        if (e.target === card && (e.key === 'Enter' || e.key === ' ')) { e.preventDefault(); openLightbox(card); } });
     });
 
     // Tabs
@@ -784,7 +842,7 @@
       }
       if (e.key === 'ArrowLeft' || e.key === 'ArrowRight') {
         const deck = lightboxMedia.querySelector('.lightbox-deck');
-        if (deck) deck.scrollBy({ left: (e.key === 'ArrowRight' ? 1 : -1) * deck.clientWidth, behavior: 'smooth' });
+        if (deck && deck._step) deck._step(e.key === 'ArrowRight' ? 1 : -1);
       }
     });
 
