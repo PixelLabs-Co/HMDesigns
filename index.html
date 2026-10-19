@@ -82,8 +82,8 @@
     .portfolio-empty { text-align: center; padding: 4rem 0; font-size: .95rem; }
     .portfolio-empty a { text-decoration: underline; text-underline-offset: 3px; }
 
-    .lightbox-overlay { position: fixed; inset: 0; z-index: 300; background: rgba(0,0,0,.92); display: flex; align-items: center; justify-content: center; padding: 2rem; opacity: 0; pointer-events: none; transition: opacity .25s ease; }
-    .lightbox-overlay.open { opacity: 1; pointer-events: all; }
+    .lightbox-overlay { position: fixed; inset: 0; z-index: 300; background: rgba(0,0,0,.92); display: flex; align-items: center; justify-content: center; padding: 2rem; opacity: 0; visibility: hidden; pointer-events: none; transition: opacity .25s ease, visibility 0s linear .25s; }
+    .lightbox-overlay.open { opacity: 1; visibility: visible; pointer-events: all; transition-delay: 0s; }
     .lightbox-card { position: relative; width: 100%; max-width: 900px; max-height: 90vh; overflow-y: auto; background: var(--w); color: var(--b); border-radius: calc(var(--r) * 1.6); transform: translateY(20px); transition: transform .3s ease; }
     .lightbox-overlay.open .lightbox-card { transform: translateY(0); }
     .lightbox-media { width: 100%; background: #f0f0f0; display: block; position: relative; }
@@ -210,17 +210,17 @@
       <div class="portfolio-card" tabindex="0" role="button" data-category="brand-design graphic-design" data-type="deck" data-title="Adobe Creative Cloud Slide Deck" data-description="An 11-slide deck design system for Adobe Creative Cloud's AI features across Photoshop, Illustrator, and InDesign — color-coded app identities carried through consistent card layouts, type, and iconography.">
         <div class="portfolio-card-media">
           <div class="portfolio-card-deck">
-            <img src="portfolio/adobe-design-trio/slide-01.jpg" alt="Adobe Creative Cloud Slide Deck slide 1" loading="lazy" />
-            <img src="portfolio/adobe-design-trio/slide-02.jpg" alt="Adobe Creative Cloud Slide Deck slide 2" loading="lazy" />
-            <img src="portfolio/adobe-design-trio/slide-03.jpg" alt="Adobe Creative Cloud Slide Deck slide 3" loading="lazy" />
-            <img src="portfolio/adobe-design-trio/slide-04.jpg" alt="Adobe Creative Cloud Slide Deck slide 4" loading="lazy" />
-            <img src="portfolio/adobe-design-trio/slide-05.jpg" alt="Adobe Creative Cloud Slide Deck slide 5" loading="lazy" />
-            <img src="portfolio/adobe-design-trio/slide-06.jpg" alt="Adobe Creative Cloud Slide Deck slide 6" loading="lazy" />
-            <img src="portfolio/adobe-design-trio/slide-07.jpg" alt="Adobe Creative Cloud Slide Deck slide 7" loading="lazy" />
-            <img src="portfolio/adobe-design-trio/slide-08.jpg" alt="Adobe Creative Cloud Slide Deck slide 8" loading="lazy" />
-            <img src="portfolio/adobe-design-trio/slide-09.jpg" alt="Adobe Creative Cloud Slide Deck slide 9" loading="lazy" />
-            <img src="portfolio/adobe-design-trio/slide-10.jpg" alt="Adobe Creative Cloud Slide Deck slide 10" loading="lazy" />
-            <img src="portfolio/adobe-design-trio/slide-11.jpg" alt="Adobe Creative Cloud Slide Deck slide 11" loading="lazy" />
+            <img src="portfolio/adobe-design-trio/slide-01.jpg" alt="Adobe Creative Cloud Slide Deck slide 1" width="1600" height="900" loading="lazy" />
+            <img src="portfolio/adobe-design-trio/slide-02.jpg" alt="Adobe Creative Cloud Slide Deck slide 2" width="1600" height="900" loading="lazy" />
+            <img src="portfolio/adobe-design-trio/slide-03.jpg" alt="Adobe Creative Cloud Slide Deck slide 3" width="1600" height="900" loading="lazy" />
+            <img src="portfolio/adobe-design-trio/slide-04.jpg" alt="Adobe Creative Cloud Slide Deck slide 4" width="1600" height="900" loading="lazy" />
+            <img src="portfolio/adobe-design-trio/slide-05.jpg" alt="Adobe Creative Cloud Slide Deck slide 5" width="1600" height="900" loading="lazy" />
+            <img src="portfolio/adobe-design-trio/slide-06.jpg" alt="Adobe Creative Cloud Slide Deck slide 6" width="1600" height="900" loading="lazy" />
+            <img src="portfolio/adobe-design-trio/slide-07.jpg" alt="Adobe Creative Cloud Slide Deck slide 7" width="1600" height="900" loading="lazy" />
+            <img src="portfolio/adobe-design-trio/slide-08.jpg" alt="Adobe Creative Cloud Slide Deck slide 8" width="1600" height="900" loading="lazy" />
+            <img src="portfolio/adobe-design-trio/slide-09.jpg" alt="Adobe Creative Cloud Slide Deck slide 9" width="1600" height="900" loading="lazy" />
+            <img src="portfolio/adobe-design-trio/slide-10.jpg" alt="Adobe Creative Cloud Slide Deck slide 10" width="1600" height="900" loading="lazy" />
+            <img src="portfolio/adobe-design-trio/slide-11.jpg" alt="Adobe Creative Cloud Slide Deck slide 11" width="1600" height="900" loading="lazy" />
           </div>
           <span class="portfolio-deck-counter">1 / 11</span>
         </div>
@@ -233,21 +233,21 @@
         </div>
       </div>
 
-      <div class="portfolio-card" tabindex="0" role="button" data-category="graphic-design" data-title="Halcyon Catalog & Business Card" data-description="Print collateral for Halcyon, a concept tech brand — a fall product catalog laying out their six-device lineup, paired with a minimal business card.">
+      <div class="portfolio-card" tabindex="0" role="button" data-category="graphic-design" data-title="Halcyon Catalog &amp; Business Card" data-description="Print collateral for Halcyon, a concept tech brand — a fall product catalog laying out their six-device lineup, paired with a minimal business card.">
         <div class="portfolio-card-media">
-          <img src="portfolio/halcyon-catalog.jpg" alt="Halcyon Catalog & Business Card" loading="lazy" />
+          <img src="portfolio/halcyon-catalog.jpg" alt="Halcyon Catalog &amp; Business Card" width="1600" height="1000" loading="lazy" />
         </div>
         <div class="portfolio-card-info">
           <div>
             <div class="portfolio-card-cat">Graphic Design</div>
-          <div class="portfolio-card-title">Halcyon Catalog & Business Card</div>
+          <div class="portfolio-card-title">Halcyon Catalog &amp; Business Card</div>
           </div>
         </div>
       </div>
 
       <div class="portfolio-card" tabindex="0" role="button" data-category="web-design" data-type="website" data-title="Pixel Labs" data-description="Design and development of the Pixel Labs studio site itself — brand identity, portfolio, pricing, and a Formspree-backed contact system, built and hosted as a fast, fully custom static site." data-url="https://www.pixelabs.co/">
         <div class="portfolio-card-media">
-          <img src="portfolio/pixelabs-homepage.jpg" alt="Pixel Labs homepage" loading="lazy" />
+          <img src="portfolio/pixelabs-homepage.jpg" alt="Pixel Labs homepage" width="1906" height="843" loading="lazy" />
           <div class="portfolio-card-badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 3h7v7M21 3l-9 9M21 14v5a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2h5"/></svg></div>
         </div>
         <div class="portfolio-card-info">
@@ -260,7 +260,7 @@
 
       <div class="portfolio-card" tabindex="0" role="button" data-category="graphic-design" data-title="Novapop Logo" data-description="Primary logo lockup for Novapop, pairing a bold spark-and-circle mark with a rounded wordmark.">
         <div class="portfolio-card-media">
-          <img src="portfolio/novapop-logo.jpg" alt="Novapop Logo" loading="lazy" />
+          <img src="portfolio/novapop-logo.jpg" alt="Novapop Logo" width="1080" height="1080" loading="lazy" />
         </div>
         <div class="portfolio-card-info">
           <div>
@@ -272,7 +272,7 @@
 
       <div class="portfolio-card" tabindex="0" role="button" data-category="brand-design" data-title="Novapop Branding" data-description="Brand identity for Novapop, including logo, app icon, wordmark lockup, and merch and packaging mockups built around a bold 'pop' motif.">
         <div class="portfolio-card-media">
-          <img src="portfolio/novapop-branding.jpg" alt="Novapop Branding" loading="lazy" />
+          <img src="portfolio/novapop-branding.jpg" alt="Novapop Branding" width="1920" height="1080" loading="lazy" />
         </div>
         <div class="portfolio-card-info">
           <div>
@@ -297,7 +297,7 @@
 
       <div class="portfolio-card" tabindex="0" role="button" data-category="graphic-design" data-title="Northcoast Coffee Co. Primary Logo" data-description="Primary logo mark for Northcoast Coffee Co., pairing a forest-and-tideline emblem with a classic serif wordmark.">
         <div class="portfolio-card-media">
-          <img src="portfolio/northcoast-coffee-co-logo.jpg" alt="Northcoast Coffee Co. Primary Logo" loading="lazy" />
+          <img src="portfolio/northcoast-coffee-co-logo.jpg" alt="Northcoast Coffee Co. Primary Logo" width="1080" height="1080" loading="lazy" />
         </div>
         <div class="portfolio-card-info">
           <div>
@@ -309,7 +309,7 @@
 
       <div class="portfolio-card" tabindex="0" role="button" data-category="brand-design" data-title="Northcoast Coffee Co." data-description="Brand identity for Northcoast Coffee Co., including logo, cup and packaging design, and social promo graphics.">
         <div class="portfolio-card-media">
-          <img src="portfolio/northcoast-coffee-co-packaging.jpg" alt="Northcoast Coffee Co." loading="lazy" />
+          <img src="portfolio/northcoast-coffee-co-packaging.jpg" alt="Northcoast Coffee Co." width="1345" height="896" loading="lazy" />
         </div>
         <div class="portfolio-card-info">
           <div>
@@ -321,7 +321,7 @@
 
       <div class="portfolio-card" tabindex="0" role="button" data-category="video" data-type="video" data-title="Travel Maui" data-youtube-id="dJkl4D4vLn0" data-youtube-si="TU-CTteFXMrXww5B">
         <div class="portfolio-card-media">
-          <img src="portfolio/travel-maui-thumb.jpg" alt="Travel Maui" loading="lazy" />
+          <img src="portfolio/travel-maui-thumb.jpg" alt="Travel Maui" width="480" height="360" loading="lazy" />
           <div class="portfolio-card-play"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></div>
         </div>
         <div class="portfolio-card-info">
@@ -334,7 +334,7 @@
 
       <div class="portfolio-card" tabindex="0" role="button" data-category="video" data-type="video" data-title="Welcome to Pixel Labs" data-youtube-id="qwxjg__--AI">
         <div class="portfolio-card-media">
-          <img src="portfolio/welcome-to-pixel-labs-thumb.jpg" alt="Welcome to Pixel Labs" loading="lazy" />
+          <img src="portfolio/welcome-to-pixel-labs-thumb.jpg" alt="Welcome to Pixel Labs" width="480" height="360" loading="lazy" />
           <div class="portfolio-card-play"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></div>
         </div>
         <div class="portfolio-card-info">
@@ -453,7 +453,7 @@
     const cards = document.querySelectorAll('.portfolio-card');
     cards.forEach(card => {
       card.addEventListener('click', (e) => { if (!e.target.closest('.portfolio-deck-arrow')) openLightbox(card); });
-      card.addEventListener('keydown', (e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openLightbox(card); } });
+      card.addEventListener('keydown', (e) => { if (e.target === card && (e.key === 'Enter' || e.key === ' ')) { e.preventDefault(); openLightbox(card); } });
     });
 
     // Tabs
@@ -553,6 +553,14 @@
     document.addEventListener('keydown', (e) => {
       if (!lightbox.classList.contains('open')) return;
       if (e.key === 'Escape') closeLightbox();
+      if (e.key === 'Tab') {
+        const f = [...lightbox.querySelectorAll('button, a[href]')].filter(el => el.offsetParent !== null);
+        if (!f.length) return;
+        const first = f[0], last = f[f.length - 1];
+        if (!lightbox.contains(document.activeElement)) { e.preventDefault(); first.focus(); }
+        else if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+        else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
+      }
       if (e.key === 'ArrowLeft' || e.key === 'ArrowRight') {
         const deck = lightboxMedia.querySelector('.lightbox-deck');
         if (deck) deck.scrollBy({ left: (e.key === 'ArrowRight' ? 1 : -1) * deck.clientWidth, behavior: 'smooth' });
