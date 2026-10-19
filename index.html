@@ -150,10 +150,27 @@
     .js .reveal { opacity: 0; transform: translateY(18px); transition: opacity .8s cubic-bezier(.2,.7,.2,1), transform .8s cubic-bezier(.2,.7,.2,1); transition-delay: var(--d, 0s); }
     .js .reveal.in { opacity: 1; transform: none; }
 
+    /* Shop */
+    .shop-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: clamp(1rem, 2vw, 1.5rem); }
+    .product { display: block; text-decoration: none; }
+    .product-media { border-radius: var(--r); overflow: hidden; background: #f2f2f2; aspect-ratio: 1; transition: box-shadow .5s ease; }
+    .product-media img { display: block; width: 100%; height: 100%; object-fit: cover; transition: transform .6s cubic-bezier(.2,.7,.2,1); }
+    .product:hover .product-media, .product:focus-visible .product-media { box-shadow: 0 18px 40px -12px rgba(0,0,0,.28); }
+    .product:hover .product-media img { transform: scale(1.03); }
+    .product-info { display: flex; justify-content: space-between; align-items: flex-start; gap: 1rem; padding-top: .75rem; }
+    .product-cat { font-size: .8rem; opacity: .6; letter-spacing: -.005em; margin-bottom: .3rem; }
+    .product-title { font-size: clamp(1.25rem, 2.2vw, 1.75rem); font-weight: 700; letter-spacing: -.04em; line-height: 1.1; }
+    .product-desc { font-size: .95rem; opacity: .7; margin-top: .5rem; max-width: 30em; }
+    .product-price { flex-shrink: 0; background: var(--b); color: var(--w); border-radius: 999px; padding: .35rem .85rem; font-size: .9rem; font-weight: 700; letter-spacing: -.01em; transition: transform .2s; }
+    .product:hover .product-price { transform: scale(1.06); }
+    .product:focus-visible { outline: 2px solid var(--b); outline-offset: 8px; border-radius: var(--r); }
+    .shop-links { margin-top: 2.5rem; }
+
     a:focus-visible { outline: 2px solid currentColor; outline-offset: 4px; border-radius: var(--r-sm); }
     @media (max-width: 760px) {
       .about-grid { grid-template-columns: 1fr; }
       .portfolio-grid { columns: 1; }
+      .shop-grid { grid-template-columns: 1fr; }
       .lightbox-overlay { padding: 1rem; } .lightbox-body { padding: 1.5rem; } .lightbox-title { font-size: 1.5rem; }
       .portfolio-card-title { font-size: 1.2rem; }
       nav { gap: 0; } nav a { font-size: .85rem; padding: .75rem .55rem; }
@@ -174,7 +191,7 @@
     <nav aria-label="Primary">
       <a href="#work">Work</a>
       <a href="#about">About</a>
-      <a href="https://harrisondesigns.gumroad.com/" target="_blank" rel="noopener">Store</a>
+      <a href="https://appleversedesigns.gumroad.com/" target="_blank" rel="noopener">Store</a>
       <a href="#contact">Contact</a>
     </nav>
   </header>
@@ -377,6 +394,35 @@
       <div class="portfolio-empty" id="portfolioEmpty" style="display:none;">
         <p>New work in this category is on the way. Check back soon, or <a href="mailto:harrisonmitch40@icloud.com?subject=Start%20a%20Project">get in touch</a> to start a project.</p>
       </div>
+    </section>
+
+    <section id="shop">
+      <div class="label"><span>Shop</span><span>Digital Goods</span></div>
+      <div class="shop-grid">
+        <a class="product" href="https://appleversedesigns.gumroad.com/l/izbzci" target="_blank" rel="noopener">
+          <div class="product-media"><img src="store/saltwater.jpg" alt="Saltwater Wallpaper Pack" width="600" height="600" loading="lazy" /></div>
+          <div class="product-info">
+            <div>
+              <div class="product-cat">Wallpaper Pack &middot; 7 wallpapers</div>
+              <div class="product-title">Saltwater Wallpaper Pack</div>
+              <p class="product-desc">Glossy, sun-soaked colour for your screens. Liquid colour under warm light.</p>
+            </div>
+            <span class="product-price">$5</span>
+          </div>
+        </a>
+        <a class="product" href="https://appleversedesigns.gumroad.com/l/weightless" target="_blank" rel="noopener">
+          <div class="product-media"><img src="store/weightless.jpg" alt="Weightless Wallpaper Pack" width="600" height="600" loading="lazy" /></div>
+          <div class="product-info">
+            <div>
+              <div class="product-cat">Wallpaper Pack &middot; 7 wallpapers</div>
+              <div class="product-title">Weightless Wallpaper Pack</div>
+              <p class="product-desc">Glowing light in deep colour. Vivid bands drifting and folding through the dark.</p>
+            </div>
+            <span class="product-price">$5</span>
+          </div>
+        </a>
+      </div>
+      <div class="links shop-links"><a href="https://appleversedesigns.gumroad.com/" target="_blank" rel="noopener">Visit the full store &nearr;</a></div>
     </section>
 
     <section id="about">
@@ -615,7 +661,7 @@
       const spy = new IntersectionObserver((entries) => {
         entries.forEach(en => { if (en.isIntersecting) links.forEach(a => a.classList.toggle('active', a.getAttribute('href') === '#' + en.target.id)); });
       }, { rootMargin: '-45% 0px -50% 0px' });
-      links.forEach(a => { const t = document.querySelector(a.getAttribute('href')); if (t) spy.observe(t); });
+      document.querySelectorAll('main section').forEach(sec => spy.observe(sec));
 
       const hero = document.querySelector('.hero');
       if (!reduce && matchMedia('(hover: hover)').matches) {
@@ -632,13 +678,13 @@
       }
 
       if (reduce) return;
-      const targets = document.querySelectorAll('#work .label, .portfolio-tabs, .portfolio-card, #about .label, .about-grid > div, .stats, .skills li, #contact .label, #contact a.big, .links');
+      const targets = document.querySelectorAll('#work .label, .portfolio-tabs, .portfolio-card, #shop .label, .product, .shop-links, #about .label, .about-grid > div, .stats, .skills li, #contact .label, #contact a.big, .links');
       const seen = new IntersectionObserver((entries) => {
         entries.forEach(en => { if (en.isIntersecting) { en.target.classList.add('in'); seen.unobserve(en.target); } });
       }, { rootMargin: '0px 0px -8% 0px', threshold: 0.05 });
       targets.forEach((el, i) => {
         el.classList.add('reveal');
-        if (el.matches('.portfolio-card')) el.style.setProperty('--d', ((i % 2) * 0.1) + 's');
+        if (el.matches('.portfolio-card, .product')) el.style.setProperty('--d', ((i % 2) * 0.1) + 's');
         if (el.matches('.skills li')) el.style.setProperty('--d', ([...el.parentElement.children].indexOf(el) * 0.06) + 's');
         seen.observe(el);
       });
