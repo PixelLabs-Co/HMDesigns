@@ -271,10 +271,10 @@
       .portfolio-tab { padding: .65rem 1.1rem; }
     }
     @media (hover: none) { .portfolio-deck-arrow { opacity: .85; } }
-    @media (max-width: 760px) { header { gap: .75rem; } .brand { font-size: 1.05rem; line-height: 1.02; } .brand span { display: block; } }
-    @media (max-width: 440px) { .brand { font-size: .92rem; } header { gap: .5rem; } nav a { padding: .75rem .36rem; font-size: .82rem; } nav a.in-badge { margin-left: 0; padding: .2rem; } }
-    @media (max-width: 360px) { nav a { padding: .75rem .3rem; font-size: .8rem; } .brand { font-size: .88rem; } }
-    @media (max-width: 340px) { header { padding-inline: 1rem; } nav a { padding: .75rem .2rem; font-size: .76rem; } .brand { font-size: .8rem; } nav a.in-badge { --tile: 24px; } }
+    @media (max-width: 760px) { header { gap: .75rem; } .brand { font-size: 1.1rem; line-height: 1.02; } .brand span { display: block; } }
+    @media (max-width: 440px) { .brand { font-size: clamp(.84rem, 4.3vw, 1.1rem); } header { gap: .5rem; } nav a { padding: .75rem .26rem; font-size: .82rem; } nav a.in-badge { margin-left: 0; padding: .2rem; } }
+    @media (max-width: 360px) { nav a { padding: .75rem .22rem; font-size: .8rem; } }
+    @media (max-width: 340px) { header { padding-inline: 1rem; } nav a { padding: .75rem .18rem; font-size: .76rem; } nav a.in-badge { --tile: 24px; } .brand { font-size: 4vw; } }
     @media (prefers-reduced-motion: reduce) { .glow i, .grain, .about-avail .dot, .hero-meta, .collage, .collage .track { animation: none !important; } html { scroll-behavior: auto; } * { transition: none !important; } }
     </style>
 </head>
