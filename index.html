@@ -232,6 +232,18 @@
     .product:hover .product-price { transform: scale(1.06); }
     .product:focus-visible { outline: 2px solid var(--b); outline-offset: 8px; border-radius: var(--r); }
     .shop-links { margin-top: 2.5rem; }
+    .shop-links a { display: inline-flex; align-items: center; gap: .55rem; }
+    /* Tiny cart: rolls gently, wheels turn, an item drops in. Speeds up on hover. */
+    .cart-glyph { width: 1.3em; height: 1.3em; flex: none; overflow: visible; animation: cartRoll 3.6s ease-in-out infinite; }
+    .cart-wheel { animation: cartWheel 1.8s linear infinite; }
+    .cart-wheel path { stroke: var(--shop); }
+    .cart-item { animation: cartDrop 3.6s ease-in infinite; }
+    .shop-links a:hover .cart-glyph { animation-duration: 1.6s; }
+    .shop-links a:hover .cart-wheel { animation-duration: .55s; }
+    .shop-links a:hover .cart-wheel path { stroke: var(--b); }
+    @keyframes cartRoll { 0%, 100% { transform: translateX(-1px); } 50% { transform: translateX(1.2px); } }
+    @keyframes cartWheel { to { transform: rotate(360deg); } }
+    @keyframes cartDrop { 0%, 14% { transform: translateY(0); opacity: 0; } 22% { opacity: 1; } 56% { transform: translateY(8.6px); opacity: 1; } 64%, 100% { transform: translateY(8.6px); opacity: 0; } }
 
     /* LinkedIn badge: the one brand colour besides the lime availability dot. */
     .in-badge { --in-blue: #0A66C2; --tile: 22px; --h: 2.15rem; --px: .85rem; display: inline-flex; align-items: center; justify-content: center; gap: .4rem; box-sizing: border-box; height: var(--h); padding: 0 var(--px); border: var(--line) solid rgba(10,102,194,.4); border-radius: 999px; background: rgba(10,102,194,.09); color: var(--b); font-size: .9rem; font-weight: 700; letter-spacing: -.02em; line-height: 1; text-decoration: none; white-space: nowrap; transition: background .2s, color .2s, border-color .2s, transform .15s; }
@@ -305,7 +317,7 @@
       .nav-links { grid-area: links; justify-content: space-between; margin-inline: -.5rem; gap: 0; }
       nav a { padding: .5rem .5rem; font-size: .92rem; }
     }
-    @media (prefers-reduced-motion: reduce) { .glow i, .grain, .about-avail .dot, .hero-meta, .collage, .collage .track { animation: none !important; } html { scroll-behavior: auto; } * { transition: none !important; } }
+    @media (prefers-reduced-motion: reduce) { .glow i, .grain, .about-avail .dot, .hero-meta, .collage, .collage .track, .cart-glyph, .cart-wheel, .cart-item { animation: none !important; } html { scroll-behavior: auto; } * { transition: none !important; } }
     </style>
 </head>
 <body>
@@ -559,7 +571,7 @@
           </div>
         </a>
       </div>
-      <div class="links shop-links"><a href="https://appleversedesigns.gumroad.com/" target="_blank" rel="noopener">Visit the full store &nearr;</a></div>
+      <div class="links shop-links"><a href="https://appleversedesigns.gumroad.com/" target="_blank" rel="noopener"><svg class="cart-glyph" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><g class="cart-body" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M2.5 4.5h2.6l2 9.6h10.3l2.1-7.4H6"/><rect class="cart-item" x="10.2" y="-1.2" width="3.6" height="3.6" rx=".9" fill="currentColor" stroke="none"/></g><g class="cart-wheel" style="transform-origin:9.4px 17.7px"><circle cx="9.4" cy="17.7" r="1.65" fill="currentColor"/><path d="M9.4 16.6v2.2" stroke-width=".9" stroke-linecap="round"/></g><g class="cart-wheel" style="transform-origin:16.2px 17.7px"><circle cx="16.2" cy="17.7" r="1.65" fill="currentColor"/><path d="M16.2 16.6v2.2" stroke-width=".9" stroke-linecap="round"/></g></svg><span>Visit the full store</span> &nearr;</a></div>
       <!-- shop:end -->
     </section>
 
