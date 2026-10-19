@@ -12,7 +12,7 @@
   <style>
     @font-face { font-family: 'DM Sans'; font-weight: 400; font-display: swap; src: url(fonts/dm-sans-400-latin.woff2) format('woff2'); }
     @font-face { font-family: 'DM Sans'; font-weight: 700; font-display: swap; src: url(fonts/dm-sans-700-latin.woff2) format('woff2'); }
-    :root { --b: #000; --w: #fff; --pad: clamp(1.25rem, 4vw, 3rem); --r: 10px; --r-sm: 6px; --line: 1px; }
+    :root { --b: #000; --w: #fff; --pad: clamp(1.25rem, 4vw, 3rem); --r: 10px; --r-sm: 6px; --line: 1px; --sheet: clamp(22px, 3.2vw, 40px); --gap: clamp(2.75rem, 6vw, 5.5rem); }
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     html { scroll-behavior: smooth; scroll-padding-top: 4rem; }
     body { background: var(--w); color: var(--b); font-family: 'DM Sans', Helvetica, Arial, sans-serif; line-height: 1.5; -webkit-font-smoothing: antialiased; }
@@ -23,7 +23,7 @@
     nav a { font-size: .9rem; letter-spacing: -.01em; text-decoration: none; padding: .4rem .8rem; border-radius: var(--r-sm); transition: background .2s, color .2s; }
     nav a:hover { background: var(--b); color: var(--w); }
 
-    .hero { position: relative; overflow: hidden; isolation: isolate; background: var(--b); color: var(--w); min-height: 100svh; display: flex; flex-direction: column; justify-content: flex-end; padding: 0 var(--pad) var(--pad); }
+    .hero { position: relative; overflow: hidden; isolation: isolate; background: var(--b); color: var(--w); min-height: 100svh; display: flex; flex-direction: column; justify-content: flex-end; padding: 0 var(--pad) calc(var(--pad) + var(--sheet)); }
     .glow { position: absolute; inset: 0; z-index: -1; filter: blur(70px); }
     .glow i { position: absolute; border-radius: 50%; background: radial-gradient(circle, #fff 0%, rgba(255,255,255,0) 70%); will-change: transform; }
     .glow i:nth-child(1) { width: 60vmax; height: 60vmax; left: -10%; top: 10%; opacity: .55; animation: drift1 18s ease-in-out infinite alternate; }
@@ -40,10 +40,11 @@
     .brand img { display: block; height: clamp(2rem, 5vw, 3rem); width: auto; aspect-ratio: 855 / 206; }
     .hero-meta { display: flex; justify-content: space-between; gap: 2rem; flex-wrap: wrap; margin-top: 2.5rem; padding-top: 1rem; border-top: var(--line) solid rgba(255,255,255,.35); font-size: .9rem; letter-spacing: -.01em;  }
 
-    section { padding: clamp(4rem, 10vw, 9rem) var(--pad); }
-    #work { padding-bottom: clamp(1.5rem, 3vw, 2.5rem); }
-    #shop { padding-top: clamp(1.5rem, 3vw, 2.5rem); }
-    .label { font-size: .9rem; letter-spacing: -.01em; display: flex; justify-content: space-between; align-items: baseline; gap: 1rem; border-top: var(--line) solid var(--b); padding-top: 1.1rem; margin-bottom: 2.5rem; }
+    /* Sections are stacked "sheets": each has rounded top corners and slides over the one before it. */
+    main > section { position: relative; margin-top: calc(var(--sheet) * -1); border-radius: var(--sheet) var(--sheet) 0 0; padding: calc(var(--gap) + var(--sheet)) var(--pad) calc(var(--gap) + var(--sheet)); background: var(--w); }
+    #shop { background: #f3f3f3; }
+    #contact { padding-bottom: var(--gap); }
+    .label { font-size: .9rem; letter-spacing: -.01em; display: flex; justify-content: space-between; align-items: baseline; gap: 1rem; margin-bottom: 2.5rem; }
     .label > span:first-child { font-size: clamp(2.25rem, 6vw, 4.5rem); font-weight: 700; letter-spacing: -.05em; line-height: 1; -webkit-text-stroke: .012em currentColor; }
 
     .portfolio-tabs { display: flex; flex-wrap: wrap; gap: .75rem; margin-bottom: 2rem; }
@@ -118,7 +119,6 @@
     .lightbox-close span:first-child { transform: rotate(45deg); } .lightbox-close span:last-child { transform: rotate(-45deg); }
 
     #about { background: var(--b); color: var(--w); }
-    #about .label { border-color: rgba(255,255,255,.35); }
     .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(2rem, 6vw, 6rem); }
     #about h2 { font-size: clamp(2.5rem, 7vw, 6rem); line-height: .95; letter-spacing: -.04em; }
     .portrait { display: block; width: 100%; max-width: 420px; height: auto; margin-top: 2.5rem; border-radius: var(--r); }
@@ -157,7 +157,7 @@
     .links a { font-size: .9rem; letter-spacing: -.01em; text-decoration: none; border: var(--line) solid var(--b); border-radius: 999px; padding: .5rem 1rem; transition: background .2s, color .2s; }
     .links a:hover { background: var(--b); color: var(--w); }
 
-    footer { display: flex; justify-content: space-between; padding: 1.5rem var(--pad); border-top: var(--line) solid rgba(0,0,0,.12); font-size: .85rem; letter-spacing: -.01em; }
+    footer { display: flex; justify-content: space-between; padding: 1.5rem var(--pad) 2rem; font-size: .85rem; letter-spacing: -.01em; }
 
 
     /* Effects */
