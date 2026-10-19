@@ -1,0 +1,44 @@
+name: Update shop from Gumroad
+
+on:
+  schedule:
+    - cron: '17 */6 * * *'   # every 6 hours
+  workflow_dispatch:         # "Run workflow" button in the Actions tab
+
+permissions:
+  contents: write
+  pages: write
+  actions: write
+
+concurrency:
+  group: update-store
+  cancel-in-progress: false
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Sync products from Gumroad
+        run: python3 scripts/update_store.py
+
+      - name: Commit and publish changes
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A index.html store
+          if git diff --cached --quiet; then
+            echo "No shop changes."
+          else
+            git commit -m "Update shop from Gumroad"
+            git push
+            gh api -X POST "repos/${{ github.repository }}/pages/builds" || true
+          fi
+
+      - name: Keep the schedule alive
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh workflow enable update-store.yml || true

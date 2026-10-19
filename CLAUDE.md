@@ -5,3 +5,4 @@
 - Plain static HTML/CSS/JS: `index.html`, `fonts/`, `portfolio/` (project images), `store/` (shop product images), `logo-v2.png`, `harrison.jpg`. No build step.
 - Design: black and white only, bold and minimalist. Project images are shown in colour.
 - Adding or editing projects: follow the "To add new work" comment above `#portfolioGrid` in `index.html`.
+- The Shop section is generated: `.github/workflows/update-store.yml` runs `scripts/update_store.py` every 6 hours, reads the Gumroad profile, and rewrites the block between the `shop:start` / `shop:end` markers in `index.html` plus `store/` images. Don't hand-edit that block; pin wording for a product in `store/overrides.json` (keyed by Gumroad permalink).
