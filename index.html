@@ -36,8 +36,7 @@
     @keyframes grain { 0% { transform: translate(0,0); } 20% { transform: translate(-4%,3%); } 40% { transform: translate(3%,-5%); } 60% { transform: translate(-5%,-2%); } 80% { transform: translate(4%,4%); } 100% { transform: translate(0,0); } }
     .sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
 
-    .brand { flex: 0 0 auto; display: block; }
-    .brand img { display: block; height: clamp(2rem, 5vw, 3rem); width: auto; aspect-ratio: 855 / 206; }
+    .brand { flex: 0 0 auto; display: block; font-size: clamp(1.15rem, 1.4vw + .65rem, 1.6rem); font-weight: 700; letter-spacing: -.05em; line-height: 1; text-decoration: none; -webkit-text-stroke: .012em currentColor; }
     .hero-meta { display: flex; justify-content: space-between; gap: 2rem; flex-wrap: wrap; margin-top: 2.5rem; padding-top: 1rem; border-top: var(--line) solid rgba(255,255,255,.35); font-size: .9rem; letter-spacing: -.01em;  }
 
     /* Sections are stacked "sheets": each has rounded top corners and slides over the one before it. */
@@ -247,14 +246,16 @@
       .portfolio-tab { padding: .65rem 1.1rem; }
     }
     @media (hover: none) { .portfolio-deck-arrow { opacity: .85; } }
-    @media (max-width: 360px) { nav a { padding: .75rem .4rem; font-size: .8rem; } .brand img { height: 1.75rem; } }
-    @media (max-width: 340px) { header { padding-inline: 1rem; } nav a { padding: .75rem .3rem; font-size: .75rem; } .brand img { height: 1.5rem; } }
+    @media (max-width: 760px) { header { gap: .75rem; } .brand { font-size: 1.05rem; line-height: 1.02; } .brand span { display: block; } }
+    @media (max-width: 440px) { .brand { font-size: .95rem; } }
+    @media (max-width: 360px) { nav a { padding: .75rem .4rem; font-size: .8rem; } .brand { font-size: .9rem; } }
+    @media (max-width: 340px) { header { padding-inline: 1rem; } nav a { padding: .75rem .3rem; font-size: .75rem; } .brand { font-size: .82rem; } }
     @media (prefers-reduced-motion: reduce) { .glow i, .grain, .about-avail .dot, .hero-meta, .collage, .collage .track { animation: none !important; } html { scroll-behavior: auto; } * { transition: none !important; } }
     </style>
 </head>
 <body>
   <header>
-    <a href="#top" class="brand" aria-label="HM Design home"><img src="logo-v3.png" alt="HM Design" width="855" height="206" /></a>
+    <a href="#top" class="brand" aria-label="Harrison Mitchell Designs, home"><span>Harrison Mitchell</span> <span>Designs</span></a>
     <nav aria-label="Primary">
       <a href="#work">Work</a>
       <a href="#about">About</a>
