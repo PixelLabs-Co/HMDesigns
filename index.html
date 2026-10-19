@@ -37,7 +37,7 @@
     .sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
 
     .brand { flex: 0 0 auto; display: block; font-size: clamp(1.15rem, 1.4vw + .65rem, 1.6rem); font-weight: 700; letter-spacing: -.05em; line-height: 1; text-decoration: none; -webkit-text-stroke: .012em currentColor; }
-    .hero-meta { display: flex; justify-content: space-between; gap: 2rem; flex-wrap: wrap; margin-top: 2.5rem; padding-top: 1rem; border-top: var(--line) solid rgba(255,255,255,.35); font-size: .9rem; letter-spacing: -.01em;  }
+    .hero-meta { display: flex; justify-content: space-between; gap: 2rem; flex-wrap: wrap; margin-top: 2.5rem; font-size: clamp(1.05rem, .9rem + .5vw, 1.3rem); letter-spacing: -.02em; }
 
     /* Sections are stacked "sheets": each has rounded top corners and slides over the one before it. */
     main > section { position: relative; margin-top: calc(var(--sheet) * -1); border-radius: var(--sheet) var(--sheet) 0 0; padding: var(--gap-top) var(--pad) calc(var(--gap) + var(--sheet)); background: var(--paper); }
@@ -123,7 +123,8 @@
     #about h2 { font-size: clamp(2.5rem, 7vw, 6rem); line-height: .95; letter-spacing: -.05em; -webkit-text-stroke: .012em currentColor; }
     .about-avail { display: inline-flex; align-items: center; gap: .55rem; font-size: .85rem !important; letter-spacing: -.01em; padding: .4rem .85rem; border: 1px solid rgba(255,255,255,.3); border-radius: 999px; margin-bottom: 1.5rem; }
     .hero-meta { align-items: center; }
-    .hero-meta .about-avail { margin-bottom: 0; font-size: .85rem; background: rgba(0,0,0,.5); }
+    .hero-meta .about-avail { margin-bottom: 0; font-size: 1em !important; padding: .5rem 1.05rem; gap: .65rem; background: rgba(0,0,0,.5); }
+    .hero-meta .about-avail .dot { width: 10px; height: 10px; }
     .about-avail .dot { width: 8px; height: 8px; border-radius: 50%; background: #a3e635; box-shadow: 0 0 6px rgba(163,230,53,.8); animation: pulse 2s ease-out infinite; }
     @keyframes pulse { 0% { box-shadow: 0 0 6px rgba(163,230,53,.8), 0 0 0 0 rgba(163,230,53,.55); } 70%, 100% { box-shadow: 0 0 6px rgba(163,230,53,.8), 0 0 0 9px rgba(163,230,53,0); } }
     #about p.about-role { font-size: 1.15rem; opacity: .75; max-width: 24em; margin-top: 1.25rem; }
@@ -241,7 +242,7 @@
       .lightbox-overlay { padding: 1rem; } .lightbox-body { padding: 1.5rem; } .lightbox-title { font-size: 1.5rem; }
       .portfolio-card-title { font-size: 1.2rem; }
       nav { gap: 0; } nav a { font-size: .85rem; padding: .75rem .55rem; }
-      .hero-meta { gap: .35rem 2rem; font-size: .85rem; }
+      .hero-meta { gap: .75rem 2rem; font-size: 1rem; }
       .lightbox-close { width: 44px; height: 44px; }
       .links a { padding: .7rem 1.1rem; }
       .contact-grid { grid-template-columns: 1fr; }
