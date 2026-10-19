@@ -122,8 +122,8 @@
     .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(2rem, 6vw, 6rem); }
     #about h2 { font-size: clamp(2.5rem, 7vw, 6rem); line-height: .95; letter-spacing: -.05em; -webkit-text-stroke: .012em currentColor; }
     .about-avail { display: inline-flex; align-items: center; gap: .55rem; font-size: .85rem !important; letter-spacing: -.01em; padding: .4rem .85rem; border: 1px solid rgba(255,255,255,.3); border-radius: 999px; margin-bottom: 1.5rem; }
-    .about-avail .dot { width: 7px; height: 7px; border-radius: 50%; background: #fff; animation: pulse 2.4s ease-in-out infinite; }
-    @keyframes pulse { 50% { opacity: .3; } }
+    .about-avail .dot { width: 8px; height: 8px; border-radius: 50%; background: #a3e635; box-shadow: 0 0 6px rgba(163,230,53,.8); animation: pulse 2s ease-out infinite; }
+    @keyframes pulse { 0% { box-shadow: 0 0 6px rgba(163,230,53,.8), 0 0 0 0 rgba(163,230,53,.55); } 70%, 100% { box-shadow: 0 0 6px rgba(163,230,53,.8), 0 0 0 9px rgba(163,230,53,0); } }
     #about p.about-role { font-size: 1.15rem; opacity: .75; max-width: 24em; margin-top: 1.25rem; }
     .about-cta { display: flex; flex-wrap: wrap; gap: .75rem; margin-top: 1.75rem; }
     .btn-light, .btn-ghost { font-size: .95rem; letter-spacing: -.01em; text-decoration: none; padding: .75rem 1.4rem; border-radius: 999px; border: var(--line) solid var(--w); transition: background .2s, color .2s, transform .15s; }
@@ -229,7 +229,7 @@
     @media (hover: none) { .portfolio-deck-arrow { opacity: .85; } }
     @media (max-width: 360px) { nav a { padding: .75rem .4rem; font-size: .8rem; } .brand img { height: 1.75rem; } }
     @media (max-width: 340px) { header { padding-inline: 1rem; } nav a { padding: .75rem .3rem; font-size: .75rem; } .brand img { height: 1.5rem; } }
-    @media (prefers-reduced-motion: reduce) { .glow i, .grain { animation: none !important; } html { scroll-behavior: auto; } * { transition: none !important; } }
+    @media (prefers-reduced-motion: reduce) { .glow i, .grain, .about-avail .dot { animation: none !important; } html { scroll-behavior: auto; } * { transition: none !important; } }
     </style>
 </head>
 <body>
