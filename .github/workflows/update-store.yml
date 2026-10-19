@@ -20,6 +20,9 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      - name: Install image library
+        run: python3 -m pip install --quiet pillow
+
       - name: Sync products from Gumroad
         run: python3 scripts/update_store.py
 
