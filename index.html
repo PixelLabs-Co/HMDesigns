@@ -132,8 +132,28 @@
     .skills li { padding: .75rem 0; border-bottom: 1px solid rgba(255,255,255,.2); letter-spacing: -.01em; font-size: .95rem; }
 
     #contact { text-align: left; }
-    #contact a.big { display: inline-block; font-size: clamp(1.5rem, 6.2vw, 5.5rem); font-weight: 700; letter-spacing: -.04em; line-height: 1; text-decoration: none; border-bottom: 2px solid var(--b); word-break: break-word; transition: opacity .2s; }
-    #contact a.big:hover { opacity: .55; }
+    .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(2rem, 6vw, 6rem); align-items: start; }
+    .contact-lede { font-size: clamp(2rem, 4.6vw, 3.75rem); font-weight: 700; letter-spacing: -.05em; line-height: 1.02; -webkit-text-stroke: .012em currentColor; }
+    .contact-sub { font-size: 1.1rem; max-width: 30em; margin-top: 1.25rem; opacity: .75; }
+    .contact-direct { display: flex; align-items: center; flex-wrap: wrap; gap: .75rem 1rem; margin-top: 2rem; }
+    .contact-email { font-size: clamp(1.1rem, 2.2vw, 1.6rem); font-weight: 700; letter-spacing: -.03em; text-decoration: none; border-bottom: 2px solid var(--b); word-break: break-word; transition: opacity .2s; }
+    .contact-email:hover { opacity: .55; }
+    .contact-copy, .contact-alt { font: inherit; font-size: .9rem; letter-spacing: -.01em; color: var(--b); background: var(--w); border: var(--line) solid var(--b); border-radius: 999px; padding: .45rem 1rem; cursor: pointer; transition: background .2s, color .2s, transform .15s; }
+    .contact-copy:hover, .contact-alt:hover { background: var(--b); color: var(--w); }
+    .contact-meta { margin-top: 1.5rem; font-size: .9rem; opacity: .6; }
+    .contact-form { display: flex; flex-direction: column; gap: 1.1rem; padding: clamp(1.25rem, 3vw, 2rem); background: #f5f5f5; border-radius: calc(var(--r) * 1.6); }
+    .field { display: flex; flex-direction: column; gap: .4rem; }
+    .field label { font-size: .85rem; font-weight: 700; letter-spacing: -.01em; }
+    .field input, .field textarea { font: inherit; font-size: 1rem; color: var(--b); background: var(--w); border: var(--line) solid rgba(0,0,0,.25); border-radius: var(--r-sm); padding: .8rem .95rem; width: 100%; resize: vertical; transition: border-color .2s, box-shadow .2s; }
+    .field input:hover, .field textarea:hover { border-color: var(--b); }
+    .field input:focus-visible, .field textarea:focus-visible { outline: none; border-color: var(--b); box-shadow: 0 0 0 3px rgba(0,0,0,.14); }
+    .field input:user-invalid, .field textarea:user-invalid { border-color: var(--b); box-shadow: 0 0 0 3px rgba(0,0,0,.14); }
+    .contact-actions { display: flex; flex-wrap: wrap; gap: .75rem; align-items: center; margin-top: .25rem; }
+    .contact-send { font: inherit; font-size: .95rem; font-weight: 700; letter-spacing: -.01em; color: var(--w); background: var(--b); border: var(--line) solid var(--b); border-radius: 999px; padding: .8rem 1.5rem; cursor: pointer; transition: background .2s, color .2s, transform .15s; }
+    .contact-send:hover { background: var(--w); color: var(--b); }
+    .contact-send:active, .contact-copy:active, .contact-alt:active { transform: scale(.97); }
+    .contact-alt { padding: .8rem 1.3rem; }
+    .contact-note { font-size: .85rem; opacity: .65; min-height: 1.3em; }
     .links { display: flex; gap: 1.75rem; margin-top: 2rem; flex-wrap: wrap; }
     .links a { font-size: .9rem; letter-spacing: -.01em; text-decoration: none; border: var(--line) solid var(--b); border-radius: 999px; padding: .5rem 1rem; transition: background .2s, color .2s; }
     .links a:hover { background: var(--b); color: var(--w); }
@@ -186,6 +206,7 @@
       .hero-meta { gap: .35rem 2rem; font-size: .85rem; }
       .lightbox-close { width: 44px; height: 44px; }
       .links a { padding: .7rem 1.1rem; }
+      .contact-grid { grid-template-columns: 1fr; }
       .portfolio-tab { padding: .65rem 1.1rem; }
     }
     @media (hover: none) { .portfolio-deck-arrow { opacity: .85; } }
@@ -456,9 +477,26 @@
 
     <section id="contact">
       <div class="label"><span>Contact</span><span>Let's work together</span></div>
-      <a class="big" href="mailto:harrisonmitch40@icloud.com">harrisonmitch40@icloud.com</a>
-      <div class="links">
-        <a href="#">Instagram</a><a href="#">Behance</a><a href="#">LinkedIn</a>
+      <div class="contact-grid">
+        <div class="contact-intro">
+          <h2 class="contact-lede">Have a project in mind? Let's talk.</h2>
+          <p class="contact-sub">Brand identity, graphic and web design, video and photography. Tell me a little about what you're working on.</p>
+          <div class="contact-direct">
+            <a class="contact-email" href="mailto:harrisonmitch40@icloud.com" id="contactEmail">harrisonmitch40@icloud.com</a>
+            <button type="button" class="contact-copy" id="copyEmail" aria-live="polite">Copy</button>
+          </div>
+          <p class="contact-meta">Portland, Oregon &middot; Available for work</p>
+        </div>
+        <form class="contact-form" id="contactForm">
+          <div class="field"><label for="cfName">Name</label><input id="cfName" name="name" type="text" autocomplete="name" required /></div>
+          <div class="field"><label for="cfEmail">Your email</label><input id="cfEmail" name="email" type="email" autocomplete="email" required /></div>
+          <div class="field"><label for="cfMessage">Message</label><textarea id="cfMessage" name="message" rows="5" placeholder="What are you working on?" required></textarea></div>
+          <div class="contact-actions">
+            <button type="submit" class="contact-send">Send message</button>
+            <button type="button" class="contact-alt" id="cfGmail">Open in Gmail</button>
+          </div>
+          <p class="contact-note" id="contactNote" role="status" aria-live="polite">Sends from your email app. No app? Use Gmail, or copy my address.</p>
+        </form>
       </div>
     </section>
   </main>
@@ -696,6 +734,41 @@
       }
     });
 
+
+    // Contact: copy address, and compose a message in the visitor's mail app or Gmail.
+    (function () {
+      const TO = 'harrisonmitch40@icloud.com';
+      const form = document.getElementById('contactForm');
+      const note = document.getElementById('contactNote');
+      const copyBtn = document.getElementById('copyEmail');
+      const say = (t) => { note.textContent = t; };
+      copyBtn.addEventListener('click', async () => {
+        try {
+          if (navigator.clipboard && window.isSecureContext) await navigator.clipboard.writeText(TO);
+          else { const t = document.createElement('textarea'); t.value = TO; t.style.position = 'fixed'; t.style.opacity = '0'; document.body.appendChild(t); t.select(); document.execCommand('copy'); t.remove(); }
+          copyBtn.textContent = 'Copied';
+        } catch (e) { copyBtn.textContent = 'Press Ctrl/Cmd+C'; window.getSelection().selectAllChildren(document.getElementById('contactEmail')); }
+        setTimeout(() => { copyBtn.textContent = 'Copy'; }, 2000);
+      });
+      const compose = () => {
+        const d = new FormData(form);
+        const name = String(d.get('name')).trim(), email = String(d.get('email')).trim(), msg = String(d.get('message')).trim();
+        return { subject: 'Project inquiry from ' + name, body: msg + '\n\n' + name + '\n' + email };
+      };
+      form.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const m = compose();
+        say('Opening your email app\u2026 If nothing opens, use Open in Gmail or copy my address.');
+        window.location.href = 'mailto:' + TO + '?subject=' + encodeURIComponent(m.subject) + '&body=' + encodeURIComponent(m.body);
+      });
+      document.getElementById('cfGmail').addEventListener('click', () => {
+        if (!form.reportValidity()) return;
+        const m = compose();
+        window.open('https://mail.google.com/mail/?view=cm&fs=1&to=' + encodeURIComponent(TO) + '&su=' + encodeURIComponent(m.subject) + '&body=' + encodeURIComponent(m.body), '_blank', 'noopener');
+        say('Gmail opened in a new tab with your message ready to send.');
+      });
+    })();
+
     // Effects: scroll progress, header shadow, active nav link, hero spotlight, reveal on scroll.
     (function () {
       const header = document.querySelector('header');
@@ -733,7 +806,7 @@
       }
 
       if (reduce) return;
-      const targets = document.querySelectorAll('#work .label, .portfolio-tabs, .portfolio-card, #shop .label, .product, .shop-links, #about .label, .about-grid > div, .stats, .skills li, #contact .label, #contact a.big, .links');
+      const targets = document.querySelectorAll('#work .label, .portfolio-tabs, .portfolio-card, #shop .label, .product, .shop-links, #about .label, .about-grid > div, .stats, .skills li, #contact .label, .contact-intro, .contact-form, .links');
       const seen = new IntersectionObserver((entries) => {
         entries.forEach(en => { if (en.isIntersecting) { en.target.classList.add('in'); seen.unobserve(en.target); } });
       }, { rootMargin: '0px 0px -8% 0px', threshold: 0.05 });
