@@ -12,13 +12,13 @@
   <style>
     @font-face { font-family: 'DM Sans'; font-weight: 400; font-display: swap; src: url(fonts/dm-sans-400-latin.woff2) format('woff2'); }
     @font-face { font-family: 'DM Sans'; font-weight: 700; font-display: swap; src: url(fonts/dm-sans-700-latin.woff2) format('woff2'); }
-    :root { --b: #000; --w: #fff; --paper: #E7E4DF; --paper-2: #DDD9D2; --paper-3: #EFEDE9; --pad: clamp(1.25rem, 4vw, 3rem); --r: 10px; --r-sm: 6px; --line: 1px; --sheet: clamp(22px, 3.2vw, 40px); --gap: clamp(2.25rem, 5vw, 4.5rem); --gap-top: clamp(1.5rem, 3.2vw, 2.75rem); }
+    :root { --b: #000; --w: #fff; --paper: #EEEEEE; --paper-2: #E3E3E3; --paper-3: #F6F6F6; --pad: clamp(1.25rem, 4vw, 3rem); --r: 10px; --r-sm: 6px; --line: 1px; --sheet: clamp(22px, 3.2vw, 40px); --gap: clamp(2.25rem, 5vw, 4.5rem); --gap-top: clamp(1.5rem, 3.2vw, 2.75rem); }
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     html { scroll-behavior: smooth; scroll-padding-top: 4rem; }
     body { background: var(--paper); color: var(--b); font-family: 'DM Sans', Helvetica, Arial, sans-serif; line-height: 1.5; -webkit-font-smoothing: antialiased; }
     a { color: inherit; }
 
-    header { position: fixed; inset: 0 0 auto; z-index: 10; display: flex; justify-content: space-between; align-items: center; padding: 1rem var(--pad); background: rgba(231,228,223,.92); -webkit-backdrop-filter: saturate(180%) blur(14px); backdrop-filter: saturate(180%) blur(14px); border-bottom: var(--line) solid rgba(0,0,0,.12); }
+    header { position: fixed; inset: 0 0 auto; z-index: 10; display: flex; justify-content: space-between; align-items: center; padding: 1rem var(--pad); background: rgba(238,238,238,.92); -webkit-backdrop-filter: saturate(180%) blur(14px); backdrop-filter: saturate(180%) blur(14px); border-bottom: var(--line) solid rgba(0,0,0,.12); }
         nav { display: flex; gap: .25rem; }
     nav a { font-size: .9rem; letter-spacing: -.01em; text-decoration: none; padding: .4rem .8rem; border-radius: var(--r-sm); transition: background .2s, color .2s; }
     nav a:hover { background: var(--b); color: var(--w); }
