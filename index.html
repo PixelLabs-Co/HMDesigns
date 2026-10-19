@@ -290,8 +290,9 @@
     .own-grid { display: grid; grid-template-columns: 1fr; gap: clamp(1rem, 2vw, 1.5rem); }
     .own-card { grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr); }
     .own-card { --brand-rgb: 146,82,156; --brand-grad: linear-gradient(100deg, #009eda 0%, #92529c 38%, #e34637 70%, #f5a623 100%); display: grid; text-decoration: none; color: var(--b); border-radius: calc(var(--r) * 1.6); overflow: hidden; border: var(--line) solid rgba(var(--brand-rgb), .3); background: linear-gradient(rgba(var(--brand-rgb), .07), rgba(var(--brand-rgb), .07)), var(--paper); transition: transform .45s cubic-bezier(.2,.7,.2,1), box-shadow .45s ease, border-color .3s; }
-    .own-card:hover, .own-card:focus-visible { transform: translateY(-4px); border-color: rgba(var(--brand-rgb), .65); box-shadow: 0 26px 50px -18px rgba(var(--brand-rgb), .55); }
-    .own-card:focus-visible { outline: 2px solid var(--b); outline-offset: 4px; }
+    .own-card:hover { transform: translateY(-4px); border-color: rgba(var(--brand-rgb), .65); box-shadow: 0 26px 50px -18px rgba(var(--brand-rgb), .55); }
+    .own-card:has(.own-cta:focus-visible) { transform: translateY(-4px); }
+    .own-cta:focus-visible { outline: 2px solid var(--b); outline-offset: 3px; }
     .own-media { position: relative; min-height: 340px; overflow: hidden; isolation: isolate; display: grid; place-items: center; background: #0b0618; }
     .own-av .own-media { background: #050505; }
     /* soft light that follows the pointer (and a slow colour drift behind the apple) */
@@ -315,10 +316,13 @@
     .own-desc { font-size: clamp(1rem, 1.3vw, 1.15rem); opacity: .78; margin-top: .9rem; max-width: 30em; }
     .own-tags { list-style: none; display: flex; flex-wrap: wrap; gap: .4rem; margin: 1.1rem 0 1.5rem; }
     .own-tags li { font-size: .78rem; letter-spacing: -.005em; padding: .25rem .7rem; border: var(--line) solid rgba(var(--brand-rgb), .4); background: rgba(var(--brand-rgb), .07); border-radius: 999px; }
-    .own-cta { display: inline-flex; align-items: center; gap: .55rem; padding: .7rem 1.25rem; font-size: .95rem; font-weight: 700; letter-spacing: -.02em; color: var(--w); background: var(--b); border-radius: 999px; position: relative; isolation: isolate; overflow: hidden; transition: gap .3s ease; }
+    .own-cta { text-decoration: none; display: inline-flex; align-items: center; gap: .55rem; padding: .7rem 1.25rem; font-size: .95rem; font-weight: 700; letter-spacing: -.02em; color: var(--w); background: var(--b); border-radius: 999px; position: relative; isolation: isolate; overflow: hidden; transition: gap .3s ease; }
     .own-cta::before { content: ''; position: absolute; inset: 0; z-index: -1; background: var(--brand-grad); opacity: 0; transition: opacity .35s; }
-    .own-card:hover .own-cta, .own-card:focus-visible .own-cta { gap: .85rem; }
-    .own-card:hover .own-cta::before, .own-card:focus-visible .own-cta::before { opacity: 1; }
+    .own-card:hover .own-cta, .own-cta:focus-visible { gap: .85rem; }
+    .own-card:hover .own-cta::before, .own-cta:focus-visible::before { opacity: 1; }
+    .own-actions { display: flex; flex-wrap: wrap; align-items: center; gap: .6rem; }
+    .own-av { cursor: pointer; }
+    .own-follow { cursor: pointer; }
     .own-cta .arrow-glyph { width: 1.2em; height: 1.2em; }
 
     a:focus-visible { outline: 2px solid currentColor; outline-offset: 4px; border-radius: var(--r-sm); }
@@ -595,7 +599,7 @@
       <div class="label"><span>Beyond Client Work</span></div>
       <p class="section-desc">A project of my own, all about the world of Apple.</p>
       <div class="own-grid">
-        <a class="own-card own-av" href="#shop">
+        <div class="own-card own-av">
           <div class="own-media" aria-hidden="true">
             <div class="own-art"><img class="layer l-apple" src="projects/appleverse-body.webp" alt="" width="941" height="296" decoding="async" /><img class="layer l-leaf" src="projects/appleverse-leaf.webp" alt="" width="941" height="296" decoding="async" /><img class="layer l-verse" src="projects/appleverse-verse.webp" alt="" width="941" height="296" decoding="async" /></div>
           </div>
@@ -604,9 +608,12 @@
             <h3 class="own-title">Appleverse</h3>
             <p class="own-desc">For people who love Apple. We create clean, bold wallpapers and graphics you can download, and dive into everything Apple on Instagram.</p>
             <ul class="own-tags"><li>Wallpapers</li><li>Graphics</li><li>Apple</li></ul>
-            <span class="own-cta">Shop Appleverse<svg class="arrow-glyph" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M6.5 13.5 12 19l5.5-5.5"/></svg></span>
+            <div class="own-actions">
+              <a class="own-cta" href="#shop">Shop Appleverse<svg class="arrow-glyph" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M6.5 13.5 12 19l5.5-5.5"/></svg></a>
+              <a class="in-badge ig-badge in-lg own-follow" href="APPLEVERSE_IG_URL" target="_blank" rel="noopener" aria-label="Follow Appleverse on Instagram"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect width="24" height="24" rx="5.5" class="in-tile"/><g class="ig-glyph"><rect x="5.4" y="5.4" width="13.2" height="13.2" rx="3.9"/><circle cx="12" cy="12" r="3.1"/></g><circle cx="16.2" cy="7.8" r="1" class="ig-dot"/></svg><span>Follow on Instagram</span></a>
+            </div>
           </div>
-        </a>
+        </div>
       </div>
     </section>
 
@@ -1023,6 +1030,12 @@
       });
     })();
 
+
+
+    // The whole Appleverse card still jumps to the Shop (the Instagram badge keeps its own link).
+    document.querySelectorAll('.own-av').forEach((card) => {
+      card.addEventListener('click', (e) => { if (!e.target.closest('a')) location.hash = '#shop'; });
+    });
 
     // My Own Projects: layers drift gently with the pointer (mouse only), and a soft light follows it.
     (function () {
