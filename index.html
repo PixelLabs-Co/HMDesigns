@@ -287,41 +287,35 @@
 
     /* My Own Projects: each card takes its brand's colours, like the social badges. */
     #projects { background: var(--paper-2); }
-    .own-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: clamp(1rem, 2vw, 1.5rem); }
-    .own-card { --brand-rgb: 117,0,209; --brand-grad: linear-gradient(100deg, #1c0a45, #7500d1); display: flex; flex-direction: column; text-decoration: none; color: var(--b); border-radius: calc(var(--r) * 1.6); overflow: hidden; border: var(--line) solid rgba(var(--brand-rgb), .3); background: linear-gradient(rgba(var(--brand-rgb), .07), rgba(var(--brand-rgb), .07)), var(--paper); transition: transform .45s cubic-bezier(.2,.7,.2,1), box-shadow .45s ease, border-color .3s; }
-    .own-av { --brand-rgb: 146,82,156; --brand-grad: linear-gradient(100deg, #009eda 0%, #92529c 38%, #e34637 70%, #f5a623 100%); }
+    .own-grid { display: grid; grid-template-columns: 1fr; gap: clamp(1rem, 2vw, 1.5rem); }
+    .own-card { grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr); }
+    .own-card { --brand-rgb: 146,82,156; --brand-grad: linear-gradient(100deg, #009eda 0%, #92529c 38%, #e34637 70%, #f5a623 100%); display: grid; text-decoration: none; color: var(--b); border-radius: calc(var(--r) * 1.6); overflow: hidden; border: var(--line) solid rgba(var(--brand-rgb), .3); background: linear-gradient(rgba(var(--brand-rgb), .07), rgba(var(--brand-rgb), .07)), var(--paper); transition: transform .45s cubic-bezier(.2,.7,.2,1), box-shadow .45s ease, border-color .3s; }
     .own-card:hover, .own-card:focus-visible { transform: translateY(-4px); border-color: rgba(var(--brand-rgb), .65); box-shadow: 0 26px 50px -18px rgba(var(--brand-rgb), .55); }
     .own-card:focus-visible { outline: 2px solid var(--b); outline-offset: 4px; }
-    .own-media { position: relative; aspect-ratio: 16 / 10; overflow: hidden; isolation: isolate; display: grid; place-items: center; background: #0b0618; }
-    .own-pl .own-media { background: linear-gradient(100deg, #0d0620 0%, #3a0a78 55%, #7500d1 100%); }
+    .own-media { position: relative; min-height: 340px; overflow: hidden; isolation: isolate; display: grid; place-items: center; background: #0b0618; }
     .own-av .own-media { background: #050505; }
     /* soft light that follows the pointer (and a slow colour drift behind the apple) */
     .own-media::before { content: ''; position: absolute; inset: -8%; z-index: -1; pointer-events: none; transition: opacity .5s; }
-    .own-pl .own-media::before { background: radial-gradient(420px circle at var(--gx, 78%) var(--gy, 18%), rgba(255,210,63,.3), transparent 60%); }
     .own-av .own-media::before { background: radial-gradient(260px circle at 24% 52%, rgba(0,158,218,.45), transparent 70%), radial-gradient(300px circle at 74% 48%, rgba(245,166,35,.28), transparent 70%), radial-gradient(320px circle at 52% 100%, rgba(227,70,55,.34), transparent 70%); opacity: .8; animation: avDrift 12s ease-in-out infinite alternate; }
     .own-av:hover .own-media::before { opacity: 1; }
     .own-art { position: relative; transition: transform .6s cubic-bezier(.2,.7,.2,1); animation: ownFloat 7s ease-in-out infinite; }
-    .own-pl .own-art { width: 34%; aspect-ratio: 655 / 626; }
-    .own-av .own-art { width: 74%; aspect-ratio: 941 / 296; animation-delay: -3s; }
+    .own-av .own-art { width: 70%; aspect-ratio: 941 / 296; animation-delay: -3s; }
     .own-card:hover .own-art { transform: scale(1.06); }
     .own-art .layer { position: absolute; inset: 0; width: 100%; height: 100%; display: block; user-select: none; -webkit-user-drag: none; transition: transform .35s ease-out; transform: translate3d(calc(var(--px, 0) * var(--dx, 0px)), calc(var(--py, 0) * var(--dy, 0px)), 0); }
-    .l-p { --dx: 7px; --dy: 5px; } .l-dot { --dx: -16px; --dy: -11px; animation: dotBob 4.6s ease-in-out infinite; }
     .l-apple { --dx: 12px; --dy: 7px; filter: drop-shadow(0 0 22px rgba(245,166,35,.35)); } .l-verse { --dx: 4px; --dy: 2px; }
     @keyframes ownFloat { 0%, 100% { translate: 0 3px; } 50% { translate: 0 -5px; } }
-    @keyframes dotBob { 0%, 100% { rotate: -4deg; } 50% { rotate: 6deg; } }
     @keyframes avDrift { from { transform: translateX(-3%) scale(1); } to { transform: translateX(3%) scale(1.08); } }
-    .own-body { display: flex; flex-direction: column; align-items: flex-start; padding: clamp(1.25rem, 2.6vw, 2rem); flex: 1; }
+    .own-body { display: flex; flex-direction: column; align-items: flex-start; justify-content: center; padding: clamp(1.5rem, 3.4vw, 3rem); }
     .own-cat { font-size: .85rem; letter-spacing: -.005em; opacity: .65; }
-    .own-title { font-size: clamp(1.6rem, 2.8vw, 2.25rem); font-weight: 700; letter-spacing: -.05em; line-height: 1.05; margin-top: .35rem; }
-    .own-desc { font-size: 1rem; opacity: .78; margin-top: .75rem; max-width: 32em; }
+    .own-title { font-size: clamp(2rem, 3.6vw, 3.25rem); font-weight: 700; letter-spacing: -.05em; line-height: 1.05; margin-top: .35rem; }
+    .own-desc { font-size: clamp(1rem, 1.3vw, 1.15rem); opacity: .78; margin-top: .9rem; max-width: 30em; }
     .own-tags { list-style: none; display: flex; flex-wrap: wrap; gap: .4rem; margin: 1.1rem 0 1.5rem; }
     .own-tags li { font-size: .78rem; letter-spacing: -.005em; padding: .25rem .7rem; border: var(--line) solid rgba(var(--brand-rgb), .4); background: rgba(var(--brand-rgb), .07); border-radius: 999px; }
-    .own-cta { display: inline-flex; align-items: center; gap: .55rem; margin-top: auto; padding: .7rem 1.25rem; font-size: .95rem; font-weight: 700; letter-spacing: -.02em; color: var(--w); background: var(--b); border-radius: 999px; position: relative; isolation: isolate; overflow: hidden; transition: gap .3s ease; }
+    .own-cta { display: inline-flex; align-items: center; gap: .55rem; padding: .7rem 1.25rem; font-size: .95rem; font-weight: 700; letter-spacing: -.02em; color: var(--w); background: var(--b); border-radius: 999px; position: relative; isolation: isolate; overflow: hidden; transition: gap .3s ease; }
     .own-cta::before { content: ''; position: absolute; inset: 0; z-index: -1; background: var(--brand-grad); opacity: 0; transition: opacity .35s; }
     .own-card:hover .own-cta, .own-card:focus-visible .own-cta { gap: .85rem; }
     .own-card:hover .own-cta::before, .own-card:focus-visible .own-cta::before { opacity: 1; }
     .own-cta .arrow-glyph { width: 1.2em; height: 1.2em; }
-    .portfolio-own-tag { flex-shrink: 0; margin-top: .2rem; font-size: .6rem; text-transform: uppercase; letter-spacing: .08em; padding: .3rem .6rem; border: var(--line) solid var(--b); border-radius: 999px; white-space: nowrap; }
 
     a:focus-visible { outline: 2px solid currentColor; outline-offset: 4px; border-radius: var(--r-sm); }
     @media (max-width: 760px) {
@@ -332,8 +326,8 @@
       .stats span { font-size: .8rem; }
       .portfolio-grid { columns: 1; }
       .shop-grid { grid-template-columns: 1fr; }
-      .own-grid { grid-template-columns: 1fr; }
-      .own-media { aspect-ratio: 16 / 9; }
+      .own-card { grid-template-columns: 1fr; }
+      .own-media { min-height: 0; aspect-ratio: 16 / 10; }
       .lightbox-overlay { padding: 1rem; } .lightbox-body { padding: 1.5rem; } .lightbox-title { font-size: 1.5rem; }
       .portfolio-card-title { font-size: 1.2rem; }
       nav { gap: 0; } nav a { font-size: .85rem; padding: .75rem .55rem; }
@@ -367,7 +361,7 @@
       .nav-links a.active, .nav-links a.active:hover { background: var(--paper-3); color: var(--b); box-shadow: 0 1px 2px rgba(0,0,0,.14), 0 0 0 .5px rgba(0,0,0,.05); }
       @media (hover: hover) { .nav-links a:not(.active):hover { background: var(--b); color: var(--w); } }
     }
-    @media (prefers-reduced-motion: reduce) { .glow i, .grain, .about-avail .dot, .hero-meta, .collage, .collage .track, .cart-glyph, .cart-wheel, .cart-item, .own-art, .l-dot, .own-av .own-media::before { animation: none !important; } html { scroll-behavior: auto; } * { transition: none !important; } }
+    @media (prefers-reduced-motion: reduce) { .glow i, .grain, .about-avail .dot, .hero-meta, .collage, .collage .track, .cart-glyph, .cart-wheel, .cart-item, .own-art, .own-av .own-media::before { animation: none !important; } html { scroll-behavior: auto; } * { transition: none !important; } }
     </style>
 </head>
 <body>
@@ -497,7 +491,6 @@
             <div class="portfolio-card-cat">Web Design</div>
           <div class="portfolio-card-title">Pixel Labs</div>
           </div>
-          <span class="portfolio-own-tag">My own project</span>
         </div>
       </div>
 
@@ -585,7 +578,6 @@
             <div class="portfolio-card-cat">Video</div>
           <div class="portfolio-card-title">Welcome to Pixel Labs</div>
           </div>
-          <span class="portfolio-own-tag">My own project</span>
         </div>
       </div>
       </div>
@@ -596,30 +588,18 @@
     </section>
 
     <section id="projects" data-spy="work">
-      <div class="label"><span>My Own Projects</span></div>
-      <p class="section-desc">Beyond client work, I run two projects of my own.</p>
+      <div class="label"><span>Beyond Client Work</span></div>
+      <p class="section-desc">A project of my own, all about the world of Apple.</p>
       <div class="own-grid">
-        <a class="own-card own-pl" href="https://www.pixelabs.co/" target="_blank" rel="noopener">
-          <div class="own-media" aria-hidden="true">
-            <div class="own-art"><img class="layer l-p" src="projects/pixel-labs-p.webp" alt="" width="655" height="626" decoding="async" /><img class="layer l-dot" src="projects/pixel-labs-dot.webp" alt="" width="655" height="626" decoding="async" /></div>
-          </div>
-          <div class="own-body">
-            <div class="own-cat">Design &amp; web studio</div>
-            <h3 class="own-title">Pixel Labs</h3>
-            <p class="own-desc">My design and web studio. Brand identity, custom websites and digital design for individuals and organizations, designed and built from first sketch to launch.</p>
-            <ul class="own-tags"><li>Brand</li><li>Web</li><li>Design</li></ul>
-            <span class="own-cta">Visit Pixel Labs<svg class="arrow-glyph" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M8.5 7H17v8.5"/></svg></span>
-          </div>
-        </a>
         <a class="own-card own-av" href="#shop">
           <div class="own-media" aria-hidden="true">
             <div class="own-art"><img class="layer l-apple" src="projects/appleverse-apple.webp" alt="" width="941" height="296" decoding="async" /><img class="layer l-verse" src="projects/appleverse-verse.webp" alt="" width="941" height="296" decoding="async" /></div>
           </div>
           <div class="own-body">
-            <div class="own-cat">Passion project &middot; Digital goods</div>
-            <h3 class="own-title">Appleverse Designs</h3>
-            <p class="own-desc">A passion project for Apple enthusiasts. Clean, bold wallpapers and graphics, made to drop straight onto your screens.</p>
-            <ul class="own-tags"><li>Wallpapers</li><li>Graphics</li><li>Digital goods</li></ul>
+            <div class="own-cat">Passion project &middot; Everything Apple</div>
+            <h3 class="own-title">Appleverse</h3>
+            <p class="own-desc">For people who love Apple. We create clean, bold wallpapers and graphics you can download, and dive into everything Apple on Instagram.</p>
+            <ul class="own-tags"><li>Wallpapers</li><li>Graphics</li><li>Apple</li></ul>
             <span class="own-cta">Shop Appleverse<svg class="arrow-glyph" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M6.5 13.5 12 19l5.5-5.5"/></svg></span>
           </div>
         </a>
@@ -676,7 +656,7 @@
         <div>
           <p>I am a freelance designer based in Portland, Oregon, helping individuals and organizations communicate with clarity and creativity. With more than ten years of experience in photography, graphic design, and web design, I create work that is visually compelling and strategically sound.</p>
           <p>Every project is an opportunity to tell a story and serve a clear purpose. My goal is to deliver work that is intentional, cohesive, and built to last.</p>
-          <p>Outside client work, I run two projects of my own: <a href="#projects">Pixel Labs and Appleverse Designs</a>.</p>
+          <p>Outside client work, I run <a href="#projects">Appleverse</a>, a passion project all about Apple.</p>
           <div class="stats"><div><b>10+</b><span>Years experience</span></div><div><b>5</b><span>Disciplines</span></div><div><b>PDX</b><span>Based in</span></div></div>
           <h3 class="about-sub">What I do</h3>
           <ul class="skills">
