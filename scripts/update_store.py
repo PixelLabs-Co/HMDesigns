@@ -27,6 +27,9 @@ CART = ('<svg class="cart-glyph" viewBox="0 0 24 24" aria-hidden="true" focusabl
         '<g class="cart-wheel" style="transform-origin:9.4px 17.7px"><circle cx="9.4" cy="17.7" r="1.65" fill="currentColor"/><path d="M9.4 16.6v2.2" stroke-width=".9" stroke-linecap="round"/></g>'
         '<g class="cart-wheel" style="transform-origin:16.2px 17.7px"><circle cx="16.2" cy="17.7" r="1.65" fill="currentColor"/><path d="M16.2 16.6v2.2" stroke-width=".9" stroke-linecap="round"/></g>'
         '</svg>')
+# Drawn arrow (not the text character, which phones swap for an emoji).
+ARROW = ('<svg class="arrow-glyph" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" '
+         'stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M8.5 7H17v8.5"/></svg>')
 TILE = 1400  # px, square; shown ~600 CSS px wide, so this stays sharp on 2x screens
 try:
     from PIL import Image
@@ -194,7 +197,7 @@ def main():
       <div class="shop-grid">
 {cards}
       </div>
-      <div class="links shop-links"><a href="{STORE_URL}" target="_blank" rel="noopener">{CART}<span>Visit my Gumroad Store</span> &nearr;</a></div>
+      <div class="links shop-links"><a href="{STORE_URL}" target="_blank" rel="noopener">{CART}<span>Visit my Gumroad Store</span>{ARROW}</a></div>
       {END}'''
     src = open(INDEX, encoding='utf-8').read()
     pat = re.compile(re.escape(START) + r'.*?' + re.escape(END), re.S)
