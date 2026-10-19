@@ -61,7 +61,10 @@
     .portfolio-card:hover img { transform: scale(1.03); }
     .portfolio-card-placeholder { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; font-size: clamp(4rem, 9vw, 7rem); font-weight: 700; letter-spacing: -.05em; color: var(--b); }
     .portfolio-card-info { display: flex; align-items: flex-start; gap: .75rem; padding: .75rem 0 0; }
+    .portfolio-grid.masonry { columns: auto; display: flex; align-items: flex-start; gap: clamp(1rem, 2vw, 1.5rem); }
+    .portfolio-col { flex: 1 1 0; min-width: 0; }
     .portfolio-card-info::before { content: counter(proj, decimal-leading-zero); font-size: .75rem; letter-spacing: .05em; padding-top: .3rem; min-width: 2rem; opacity: .5; }
+    .masonry .portfolio-card-info::before { content: attr(data-n); }
     .portfolio-card-info > div:first-of-type { flex: 1; }
     .portfolio-card-cat { font-size: .8rem; letter-spacing: -.005em; margin-bottom: .3rem; opacity: .6; }
     .portfolio-card-title { font-size: clamp(1.25rem, 2.2vw, 1.75rem); font-weight: 700; letter-spacing: -.04em; line-height: 1.1; background: linear-gradient(currentColor, currentColor) 0 100% / 0 2px no-repeat; transition: background-size .35s ease; display: inline; }
@@ -543,6 +546,49 @@
     const workCount = document.getElementById('workCount');
     function updateCount(n) { workCount.textContent = String(n).padStart(2, '0') + (n === 1 ? ' Project' : ' Projects'); }
     updateCount(cards.length);
+
+    // Masonry: balance the cards across two columns ourselves. CSS multi-column
+    // mis-sizes the grid in Safari (a big blank gap under the last row), so it is
+    // only the no-JavaScript fallback. Numbers follow the visible cards in order.
+    const grid = document.getElementById('portfolioGrid');
+    const twoCols = matchMedia('(min-width: 761px)');
+    let colA = null, colB = null;
+    function layoutGrid() {
+      if (!twoCols.matches) {
+        if (colA) {
+          cards.forEach(c => grid.appendChild(c));
+          colA.remove(); colB.remove(); colA = colB = null;
+          grid.classList.remove('masonry');
+        }
+        return;
+      }
+      if (!colA) {
+        colA = document.createElement('div'); colA.className = 'portfolio-col';
+        colB = document.createElement('div'); colB.className = 'portfolio-col';
+        grid.classList.add('masonry');
+        grid.append(colA, colB);
+        cards.forEach(c => colA.appendChild(c));   // measure every card at column width
+      }
+      const heights = [...cards].map(c => c.classList.contains('is-hidden') ? 0
+        : c.getBoundingClientRect().height + parseFloat(getComputedStyle(c).marginBottom));
+      const plan = [[], []], used = [0, 0];
+      let n = 0;
+      cards.forEach((c, i) => {
+        const t = used[0] <= used[1] ? 0 : 1;
+        plan[t].push(c); used[t] += heights[i];
+        const info = c.querySelector('.portfolio-card-info');
+        if (heights[i]) info.dataset.n = String(++n).padStart(2, '0');
+      });
+      [[colA, plan[0]], [colB, plan[1]]].forEach(([col, list]) => {
+        list.forEach((c, i) => { if (col.children[i] !== c) col.insertBefore(c, col.children[i] || null); });
+      });
+    }
+    layoutGrid();
+    twoCols.addEventListener('change', layoutGrid);
+    let relayout = 0;
+    addEventListener('resize', () => { clearTimeout(relayout); relayout = setTimeout(layoutGrid, 150); });
+    addEventListener('load', layoutGrid);
+    if (document.fonts && document.fonts.ready) document.fonts.ready.then(layoutGrid);
     document.querySelectorAll('.portfolio-tab').forEach(tab => {
       tab.addEventListener('click', () => {
         document.querySelectorAll('.portfolio-tab').forEach(t => t.classList.remove('active'));
@@ -556,6 +602,7 @@
         });
         portfolioEmpty.style.display = visible === 0 ? 'block' : 'none';
         updateCount(visible);
+        layoutGrid();
       });
     });
 
