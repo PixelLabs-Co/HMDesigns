@@ -285,7 +285,7 @@
 
       <div class="portfolio-card" tabindex="0" role="button" data-category="web-design" data-type="website" data-title="Send Slater Six" data-description="Website design for Send Slater Six, a ministry site sharing the Slater family's work training leaders in Africa." data-url="https://www.sendslatersix.com">
         <div class="portfolio-card-media">
-          <img src="portfolio/sendslatersix-homepage.jpg" alt="Send Slater Six homepage" loading="lazy" />
+          <img src="portfolio/sendslatersix-homepage.jpg" alt="Send Slater Six homepage" width="2000" height="1016" loading="lazy" />
           <div class="portfolio-card-badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 3h7v7M21 3l-9 9M21 14v5a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2h5"/></svg></div>
         </div>
         <div class="portfolio-card-info">
@@ -538,7 +538,7 @@
       lightbox.classList.add('open');
       lightbox.setAttribute('aria-hidden', 'false');
       document.body.style.overflow = 'hidden';
-      lightboxClose.focus();
+      lightboxClose.focus({ preventScroll: true });
     }
 
     function closeLightbox() {
@@ -546,7 +546,7 @@
       lightbox.setAttribute('aria-hidden', 'true');
       document.body.style.overflow = '';
       lightboxMedia.innerHTML = '';
-      if (lastFocusedLightbox) lastFocusedLightbox.focus();
+      if (lastFocusedLightbox) lastFocusedLightbox.focus({ preventScroll: true });
     }
 
     lightboxClose.addEventListener('click', closeLightbox);
