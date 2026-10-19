@@ -120,15 +120,29 @@
 
     #about { background: var(--b); color: var(--w); }
     .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(2rem, 6vw, 6rem); }
-    #about h2 { font-size: clamp(2.5rem, 7vw, 6rem); line-height: .95; letter-spacing: -.04em; }
+    #about h2 { font-size: clamp(2.5rem, 7vw, 6rem); line-height: .95; letter-spacing: -.05em; -webkit-text-stroke: .012em currentColor; }
+    .about-avail { display: inline-flex; align-items: center; gap: .55rem; font-size: .85rem !important; letter-spacing: -.01em; padding: .4rem .85rem; border: 1px solid rgba(255,255,255,.3); border-radius: 999px; margin-bottom: 1.5rem; }
+    .about-avail .dot { width: 7px; height: 7px; border-radius: 50%; background: #fff; animation: pulse 2.4s ease-in-out infinite; }
+    @keyframes pulse { 50% { opacity: .3; } }
+    #about p.about-role { font-size: 1.15rem; opacity: .75; max-width: 24em; margin-top: 1.25rem; }
+    .about-cta { display: flex; flex-wrap: wrap; gap: .75rem; margin-top: 1.75rem; }
+    .btn-light, .btn-ghost { font-size: .95rem; letter-spacing: -.01em; text-decoration: none; padding: .75rem 1.4rem; border-radius: 999px; border: var(--line) solid var(--w); transition: background .2s, color .2s, transform .15s; }
+    .btn-light { background: var(--w); color: var(--b); font-weight: 700; }
+    .btn-light:hover { background: transparent; color: var(--w); }
+    .btn-ghost { color: var(--w); }
+    .btn-ghost:hover { background: var(--w); color: var(--b); }
+    .btn-light:active, .btn-ghost:active { transform: scale(.97); }
     .portrait { display: block; width: 100%; max-width: 420px; height: auto; margin-top: 2.5rem; border-radius: var(--r); }
     #about p { font-size: 1.15rem; max-width: 34em; }
     #about p + p { margin-top: 1.25rem; }
-    .stats { display: flex; gap: 3rem; margin-top: 2.5rem; }
+    .stats { display: flex; flex-wrap: wrap; gap: 1.5rem 3rem; margin-top: 2.5rem; }
     .stats b { display: block; font-size: clamp(2.5rem, 6vw, 4.5rem); line-height: 1; letter-spacing: -.04em; }
     .stats span { font-size: .9rem; letter-spacing: -.01em; opacity: .7; }
-    .skills { list-style: none; margin-top: 2.5rem; border-top: 1px solid rgba(255,255,255,.2); }
-    .skills li { padding: .75rem 0; border-bottom: 1px solid rgba(255,255,255,.2); letter-spacing: -.01em; font-size: .95rem; }
+    .about-sub { font-size: .9rem; font-weight: 400; letter-spacing: -.01em; opacity: .6; margin-top: 3rem; }
+    .skills { list-style: none; margin-top: .75rem; border-top: 1px solid rgba(255,255,255,.2); }
+    .skills li { display: grid; grid-template-columns: 11rem 1fr; gap: .25rem 1.5rem; align-items: baseline; padding: .95rem 0; border-bottom: 1px solid rgba(255,255,255,.2); letter-spacing: -.01em; font-size: .95rem; }
+    .skills strong { font-weight: 700; font-size: 1rem; }
+    .skills span { opacity: .65; }
 
     #contact { text-align: left; }
     .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(2rem, 6vw, 6rem); align-items: start; }
@@ -197,6 +211,10 @@
     a:focus-visible { outline: 2px solid currentColor; outline-offset: 4px; border-radius: var(--r-sm); }
     @media (max-width: 760px) {
       .about-grid { grid-template-columns: 1fr; }
+      .skills li { grid-template-columns: 1fr; }
+      .stats { display: grid; grid-template-columns: repeat(3, auto); justify-content: space-between; gap: 1rem; }
+      .stats b { font-size: 2.5rem; }
+      .stats span { font-size: .8rem; }
       .portfolio-grid { columns: 1; }
       .shop-grid { grid-template-columns: 1fr; }
       .lightbox-overlay { padding: 1rem; } .lightbox-body { padding: 1.5rem; } .lightbox-title { font-size: 1.5rem; }
@@ -460,15 +478,26 @@
       <div class="label"><span>About</span></div>
       <div class="about-grid">
         <div class="about-left">
-          <h2>Hey, I'm<br>Harrison.</h2>
-          <img class="portrait" src="harrison.jpg" alt="Harrison, designer, smiling" width="1000" height="1000" />
+          <p class="about-avail"><span class="dot" aria-hidden="true"></span>Available for work</p>
+          <h2>Harrison<br>Mitchell.</h2>
+          <p class="about-role">Freelance designer in Portland, Oregon. Brand, graphic and web design for individuals and organizations.</p>
+          <div class="about-cta">
+            <a class="btn-light" href="#contact">Start a project</a>
+            <a class="btn-ghost" href="#work">View work</a>
+          </div>
+          <img class="portrait" src="harrison.jpg" alt="Harrison Mitchell, designer, smiling" width="1000" height="1000" />
         </div>
         <div>
           <p>I am a freelance designer based in Portland, Oregon, helping individuals and organizations communicate with clarity and creativity. With more than ten years of experience in photography, graphic design, and web design, I create work that is visually compelling and strategically sound.</p>
           <p>Every project is an opportunity to tell a story and serve a clear purpose. My goal is to deliver work that is intentional, cohesive, and built to last.</p>
-          <div class="stats"><div><b>10+</b><span>Years Experience</span></div><div><b>PDX</b><span>Based In</span></div></div>
+          <div class="stats"><div><b>10+</b><span>Years experience</span></div><div><b>5</b><span>Disciplines</span></div><div><b>PDX</b><span>Based in</span></div></div>
+          <h3 class="about-sub">What I do</h3>
           <ul class="skills">
-            <li>Brand Identity</li><li>Graphic Design</li><li>Web Design</li><li>Photography</li><li>Videography</li>
+            <li><strong>Brand Identity</strong><span>Logos, visual systems and brand guidelines</span></li>
+            <li><strong>Graphic Design</strong><span>Print, packaging, social and presentation design</span></li>
+            <li><strong>Web Design</strong><span>Custom, responsive websites from design to launch</span></li>
+            <li><strong>Photography</strong><span>Imagery for brands, products and people</span></li>
+            <li><strong>Videography</strong><span>Travel and promotional video</span></li>
           </ul>
         </div>
       </div>
