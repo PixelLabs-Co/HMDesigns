@@ -101,7 +101,7 @@
     .portfolio-card-deck.dragging, .lightbox-deck.dragging { scroll-snap-type: none; cursor: grabbing; }
     .lightbox-deck img { width: 100%; height: auto; display: block; }
     .portfolio-card:hover .portfolio-card-deck img { transform: none; }
-    .portfolio-deck-counter { position: absolute; bottom: 1rem; right: 1rem; font-size: .65rem; letter-spacing: .1em; background: var(--b); color: var(--w); padding: .3rem .55rem; border-radius: 999px; pointer-events: none; }
+    .portfolio-deck-counter { position: absolute; bottom: 1rem; right: 1rem; font-size: .72rem; letter-spacing: .1em; background: var(--b); color: var(--w); padding: .3rem .55rem; border-radius: 999px; pointer-events: none; }
     .portfolio-deck-arrow { position: absolute; top: 50%; transform: translateY(-50%); width: 34px; height: 34px; border-radius: 50%; background: var(--b); border: 0; color: var(--w); display: flex; align-items: center; justify-content: center; opacity: 0; transition: opacity .2s; cursor: pointer; z-index: 2; }
     .portfolio-card-media:hover .portfolio-deck-arrow { opacity: 1; }
     .portfolio-deck-arrow.prev { left: .75rem; } .portfolio-deck-arrow.next { right: .75rem; }
@@ -383,6 +383,35 @@
       .nav-links a.active, .nav-links a.active:hover { background: var(--paper-3); color: var(--b); box-shadow: 0 1px 2px rgba(0,0,0,.14), 0 0 0 .5px rgba(0,0,0,.05); }
       @media (hover: hover) { .nav-links a:not(.active):hover { background: var(--b); color: var(--w); } }
     }
+    /* Touch targets: same look, but an invisible padded hit area around small links and icons. */
+    .brand, .contact-email, .to-top, nav a.in-badge { position: relative; }
+    .brand::after, .contact-email::after, .to-top::after, nav a.in-badge::after { content: ''; position: absolute; inset: -.5rem -.35rem; }
+    .brand::after { inset: -.8rem -.4rem; }
+    /* Large text sizes: nothing may push the page wider than the screen. */
+    #about h2 { font-size: min(clamp(2.5rem, 7vw, 6rem), 8vw); overflow-wrap: anywhere; }
+    .about-grid > div, .contact-grid > div, .shop-grid > *, .product-info > div { min-width: 0; }
+    .skills li { grid-template-columns: minmax(0, 11rem) minmax(0, 1fr); }
+    .skills span, .contact-email { overflow-wrap: anywhere; }
+    .shop-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .shop-links a { max-width: 100%; }
+    .shop-links a > span { min-width: 0; white-space: normal; }
+    .in-badge.in-lg, .in-badge.in-dark { max-width: 100%; height: auto; min-height: var(--h); padding-block: .3rem; white-space: normal; }
+    .portfolio-card-info > div:first-of-type { min-width: 0; overflow-wrap: anywhere; }
+    @media (max-width: 760px) {
+      #about h2 { font-size: min(clamp(2.5rem, 7vw, 6rem), 13vw); }
+      .skills li { grid-template-columns: minmax(0, 1fr); }
+      .shop-grid { grid-template-columns: minmax(0, 1fr); }
+      .stats { grid-template-columns: repeat(3, minmax(0, auto)); }
+      .stats span { overflow-wrap: anywhere; }
+      .stats b { font-size: min(2.5rem, 12.5vw); }
+    }
+    /* The header wraps instead of running off the screen. */
+    @media (min-width: 600px) { header { flex-wrap: wrap; row-gap: .5rem; } nav { flex-wrap: wrap; justify-content: flex-end; } }
+    @media (max-width: 599px) {
+      .brand { font-size: min(clamp(1.1rem, 5.3vw, 1.5rem), 7vw); }
+      .nav-links { flex-wrap: wrap; border-radius: 22px; }
+      .nav-links a { flex: 1 1 22%; }
+    }
     @media (prefers-reduced-motion: reduce) { .glow i, .grain, .about-avail .dot, .hero-meta, .collage, .collage .track, .cart-glyph, .cart-wheel, .cart-item, .own-art, .l-leaf, .own-av .own-media::before { animation: none !important; } html { scroll-behavior: auto; } * { transition: none !important; } }
     </style>
 </head>
@@ -421,7 +450,7 @@
     </div>
 
     <section id="work">
-      <div class="label"><span>Selected Work</span></div>
+      <div class="label" role="heading" aria-level="2"><span>Selected Work</span></div>
       <p class="section-desc">Recent brand, graphic, web, video and photography projects. Select any project to see more.</p>
       <div class="portfolio-tabs" id="portfolioTabs">
         <button class="portfolio-tab active" data-filter="all">All</button>
@@ -610,7 +639,7 @@
     </section>
 
     <section id="projects" data-spy="work">
-      <div class="label"><span>Beyond Client Work</span></div>
+      <div class="label" role="heading" aria-level="2"><span>Beyond Client Work</span></div>
       <p class="section-desc">A project of my own, all about the world of Apple.</p>
       <div class="own-grid">
         <div class="own-card own-av">
@@ -624,7 +653,7 @@
             <ul class="own-tags"><li>Wallpapers</li><li>Graphics</li><li>Apple</li></ul>
             <div class="own-actions">
               <a class="own-cta" href="#shop">Shop Appleverse<svg class="arrow-glyph" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M6.5 13.5 12 19l5.5-5.5"/></svg></a>
-              <a class="in-badge ig-badge in-lg own-follow" href="https://www.instagram.com/appleverse.designs/" target="_blank" rel="noopener" aria-label="Follow Appleverse on Instagram"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect width="24" height="24" rx="5.5" class="in-tile"/><g class="ig-glyph"><rect x="5.4" y="5.4" width="13.2" height="13.2" rx="3.9"/><circle cx="12" cy="12" r="3.1"/></g><circle cx="16.2" cy="7.8" r="1" class="ig-dot"/></svg><span>Follow on Instagram</span></a>
+              <a class="in-badge ig-badge in-lg own-follow" href="https://www.instagram.com/appleverse.designs/" target="_blank" rel="noopener" aria-label="Follow on Instagram (@appleverse.designs)"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect width="24" height="24" rx="5.5" class="in-tile"/><g class="ig-glyph"><rect x="5.4" y="5.4" width="13.2" height="13.2" rx="3.9"/><circle cx="12" cy="12" r="3.1"/></g><circle cx="16.2" cy="7.8" r="1" class="ig-dot"/></svg><span>Follow on Instagram</span></a>
             </div>
           </div>
         </div>
@@ -632,7 +661,7 @@
     </section>
 
     <section id="shop">
-      <div class="label"><span>Shop</span></div>
+      <div class="label" role="heading" aria-level="2"><span>Shop</span></div>
       <p class="section-desc">Digital downloads I've designed, available through my Gumroad store.</p>
       <!-- shop:start (generated by scripts/update_store.py - do not edit by hand) -->
       <div class="shop-grid">
@@ -675,7 +704,7 @@
     </section>
 
     <section id="about">
-      <div class="label"><span>About</span></div>
+      <div class="label" role="heading" aria-level="2"><span>About</span></div>
       <div class="about-grid">
         <div class="about-left">
           <p class="about-avail"><span class="dot" aria-hidden="true"></span>Available for work</p>
@@ -707,7 +736,7 @@
     </section>
 
     <section id="contact">
-      <div class="label"><span>Contact</span></div>
+      <div class="label" role="heading" aria-level="2"><span>Contact</span></div>
       <div class="contact-grid">
         <div class="contact-intro">
           <h2 class="contact-lede">Have a project in mind? Let's talk.</h2>
@@ -717,8 +746,8 @@
             <button type="button" class="contact-copy" id="copyEmail" aria-live="polite">Copy</button>
           </div>
           <p class="contact-meta">Portland, Oregon &middot; Available for work</p>
-          <div class="contact-social"><a class="in-badge in-lg" href="https://www.linkedin.com/in/harrison-mitchell-16714883" target="_blank" rel="noopener" aria-label="Harrison Mitchell on LinkedIn"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect width="24" height="24" rx="5.5" class="in-tile"/><g class="in-glyph"><circle cx="7.3" cy="7.5" r="1.6"/><rect x="5.9" y="10" width="2.8" height="8.3"/><path d="M11.2 10h2.7v1.2c.5-.9 1.5-1.4 2.7-1.4 2.3 0 3.1 1.5 3.1 3.6v4.9h-2.8v-4.3c0-1.1-.4-1.7-1.3-1.7-1 0-1.6.7-1.6 1.8v4.2h-2.8z"/></g></svg><span>Connect on LinkedIn</span></a>
-            <a class="in-badge ig-badge in-lg" href="https://www.instagram.com/harrisonmitch/" target="_blank" rel="noopener" aria-label="Harrison Mitchell on Instagram"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect width="24" height="24" rx="5.5" class="in-tile"/><g class="ig-glyph"><rect x="5.4" y="5.4" width="13.2" height="13.2" rx="3.9"/><circle cx="12" cy="12" r="3.1"/></g><circle cx="16.2" cy="7.8" r="1" class="ig-dot"/></svg><span>Follow on Instagram</span></a></div>
+          <div class="contact-social"><a class="in-badge in-lg" href="https://www.linkedin.com/in/harrison-mitchell-16714883" target="_blank" rel="noopener" aria-label="Connect on LinkedIn (Harrison Mitchell)"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect width="24" height="24" rx="5.5" class="in-tile"/><g class="in-glyph"><circle cx="7.3" cy="7.5" r="1.6"/><rect x="5.9" y="10" width="2.8" height="8.3"/><path d="M11.2 10h2.7v1.2c.5-.9 1.5-1.4 2.7-1.4 2.3 0 3.1 1.5 3.1 3.6v4.9h-2.8v-4.3c0-1.1-.4-1.7-1.3-1.7-1 0-1.6.7-1.6 1.8v4.2h-2.8z"/></g></svg><span>Connect on LinkedIn</span></a>
+            <a class="in-badge ig-badge in-lg" href="https://www.instagram.com/harrisonmitch/" target="_blank" rel="noopener" aria-label="Follow on Instagram (@harrisonmitch)"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect width="24" height="24" rx="5.5" class="in-tile"/><g class="ig-glyph"><rect x="5.4" y="5.4" width="13.2" height="13.2" rx="3.9"/><circle cx="12" cy="12" r="3.1"/></g><circle cx="16.2" cy="7.8" r="1" class="ig-dot"/></svg><span>Follow on Instagram</span></a></div>
         </div>
         <form class="contact-form" id="contactForm">
           <div class="field"><label for="cfName">Name</label><input id="cfName" name="name" type="text" autocomplete="name" required /></div>
@@ -771,11 +800,13 @@
       const goTo = (i) => deckEl.scrollTo({ left: Math.max(0, Math.min(total - 1, i)) * deckEl.clientWidth, behavior: 'smooth' });
       const step = (dir) => { deckEl.dataset.userInteracted = '1'; goTo(Math.round(deckEl.scrollLeft / deckEl.clientWidth) + dir); };
       deckEl._step = step;
+      const inCard = !!parent.closest('.portfolio-card');
+      if (inCard) deckEl.tabIndex = -1;       // the card itself is the one tab stop; Left/Right on it steps the deck
       const arrow = (dir, label, path) => {
-        const b = document.createElement('button');
+        const b = document.createElement(inCard ? 'span' : 'button');
         b.className = 'portfolio-deck-arrow ' + (dir < 0 ? 'prev' : 'next');
-        b.type = 'button';
-        b.setAttribute('aria-label', label);
+        if (inCard) b.setAttribute('aria-hidden', 'true');
+        else { b.type = 'button'; b.setAttribute('aria-label', label); }
         b.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="' + path + '"/></svg>';
         b.addEventListener('click', (e) => { e.stopPropagation(); step(dir); });
         parent.appendChild(b);
@@ -986,7 +1017,8 @@
         lightboxLink.href = '#';
       }
 
-      lastFocusedLightbox = document.activeElement;
+      // Focus comes back to the card itself, even if a click landed on something inside it (like the deck strip).
+      lastFocusedLightbox = card.contains(document.activeElement) ? card : document.activeElement;
       lightbox.classList.add('open');
       lightbox.setAttribute('aria-hidden', 'false');
       document.body.style.overflow = 'hidden';
